@@ -1,0 +1,184 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3 ">
+                    <h3>Заказ</h3>
+                    <button class="btn btn-primary word-btn" onclick="Export2Doc('word', 'table');">Export as Doc</button>
+                </div>
+                <div id="word">
+                    <table style="width: 100%;">
+                        <tr>
+                            <div>
+                                <img src="../../assets/images/altech_p.png" class="m-r-sm" alt="Toast image" width="100%">
+                            </div>
+                        </tr>
+                        <tr>
+                            <th>
+                                Отправитель:
+                            </th>
+                            <th >
+                                Получатель:
+                            </th>
+                        </tr>
+                        <tr>
+                            <td >
+                                <div style="margin-left: 7px;display: flex;align-items: center" >
+                                    <span style="margin-right: 7px" >Продавец:</span>
+                                    <span style="margin-left: 7px" ><b>Altech.uz</b></span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Заказчик:</span>
+                                    <span style="margin-left: 7px"><b>{{cart.name}}</b></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px" >Номер телефона:</span>
+                                    <span style="margin-left: 7px"><b>+99 871 200 32 23 / +99 899 322 22 23</b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Номер телефона:</span>
+                                    <span style="margin-left: 7px"><b>{{cart.phone}}</b></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Адрес:</span>
+                                    <span style="margin-left: 7px"><b> ул.Чапаната 8</b></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Адрес:</span>
+                                    <span style="margin-left: 7px"><b>{{cart.adress}}</b></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Гарантия:</span>
+                                    <span style="margin-left: 7px"><b> __________</b></span>
+                                </div>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Дата:</span>
+                                    <span style="margin-left: 7px"><b> ________</b></span>
+                                </div>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="margin-left: 7px;display: flex;align-items: center">
+                                    <span style="margin-right: 7px">Имя продавца:</span>
+                                    <span style="margin-left: 7px"><b> ___________________________</b></span>
+                                </div>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="font-size: 30px" scope="col">Заказы</th>
+                            <th style="text-align: right" scope="col">Итого: <b>{{allSumma}} сум</th>
+                        </tr>
+                    </table>
+
+                    <table style="border: 1px;" cellspacing= 0 class="table table-hover" id="protable">
+                        <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Название продукт</th>
+                            <th scope="col">Цена  (шт)</th>
+                            <th scope="col">Количества</th>
+                            <th scope="col">Обшая цена</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tbodyy">
+                            {{#each cart.product}}
+                                <tr>
+                                    <td>{{index}}</td>
+                                    <td>{{id.title}}</td>
+                                    <td>{{id.price}} сум</td>
+                                    <td>{{count}} шт</td>
+                                    <td>{{sum}} сум</td>
+                                </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .word-btn {
+        transition: 0.3s;
+    }
+    .word-btn:hover {
+        color: #fff;
+        background-color: #0a53be;
+    }
+    /*.social-icon {*/
+    /*    width: 30px;*/
+    /*    height: 30px;*/
+    /*    margin-right: 10px;*/
+
+    /*}*/
+</style>
+<script>
+    function Export2Doc(element, filename = ''){
+        var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title>";
+        // var style = "<style> table{width: 100%;cellspacing=0;} th, td { border: 1px solid #000000; } img {width: 20px;height: 20px;margin-right: 10px}</style>"
+        var postHtml = "</body></html>";
+        var html = preHtml+"</head><body>"+ document.getElementById(element).innerHTML+postHtml;
+
+        var blob = new Blob(['\ufeff', html],{
+            type: 'application/msword'
+        });
+
+        var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+
+        filename = filename?filename+'.doc': 'document.doc';
+
+        var downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if(navigator.msSaveOrOpenBlob){
+            navigator.msSaveOrOpenBlob(blob, filename);
+        }else{
+            downloadLink.href = url;
+
+            downloadLink.download = filename;
+
+            downloadLink.click();
+        }
+
+        document.body.removeChild(downloadLink);
+
+
+    }
+
+</script>

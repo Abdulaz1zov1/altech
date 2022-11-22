@@ -1,0 +1,167 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center mb-3">
+                    <h5 class="card-title mb-0">{{title}}</h5>
+                    <div class="d-flex align-center">
+                        <a href="/debtor/excell" class="btn btn-primary mr-2 excell-btn">Excell
+                            <i class="fas fa-file ml-2"></i>
+                        </a>
+                        <button class="btn btn-info ml-2" data-bs-toggle="modal" data-bs-target="#newcat">Добавить</button>
+                    </div>
+
+                </div>
+                <div class="d-flex justify-content-end align-items-center pr-1">
+                    <h5 class="card-title ml-2 mt-4">Обшая сумма должники: <b>{{summaSum}}</b> сум  | <b>{{summaDollar}} </b> $</h5>
+                    
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col">Сумма</th>
+                            <th scope="col">Дата добавления</th>
+                            <th scope="col">Срок</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each debtor}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td>{{title}}</td>
+                            <td>{{{discription}}}</td>
+                            <td>{{summa}} {{currency}}</td>
+                            <td>{{createdAt}}</td>
+                            <td>{{data}}</td>
+                            <td class="text-right">
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upcate" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/debtor/delete/{{_id}}" 
+                                    onclick="return confirm('Вы уверены?')" 
+                                    class="ml-2 btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="newcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить должник</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/debtor/" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Имя" required>
+                        <label for="floatingInput1">Имя</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="discription" class="form-control" id="floatingInput1" placeholder="Описание" required>
+                        <label for="floatingInput1">Описание</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" name="data" class="form-control" id="floatingInput1" placeholder="Срок" required>
+                        <label for="floatingInput1">Срок</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="summa" class="form-control" id="floatingInput1" placeholder="Сумма" required>
+                        <label for="floatingInput1">Сумма</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="currency" id="floatingSelect1" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Sum</option>
+                            <option value="1">$</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect1 padding">Статус</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upcate" tabindex="-1" aria-labelledby="upcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Изменить</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/debtor/save" method="post" name="upcate" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название категории" required>
+                        <label for="floatingInput1">Название</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="discription" class="form-control" id="floatingInput1" placeholder="Описание" required>
+                        <label for="floatingInput1">Описание</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" name="data" class="form-control" id="floatingInput1" placeholder="Срок" required>
+                        <label for="floatingInput1">Срок</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="summa" class="form-control" id="floatingInput1" placeholder="Сумма" required>
+                        <label for="floatingInput1">Сумма</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="currency" id="floatingSelect1" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Sum</option>
+                            <option value="1">$</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect1 padding">Валюта</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .excell-btn:hover {
+        background-color: green;
+        color: white
+    }
+</style>
+<script>
+    let upForm = document.forms.upcate
+    const edit = (id) => {
+        fetch(`/debtor/${id}`)
+        .then(res => res.json())
+        .then(debtor => {
+            upForm.title.value = debtor.title
+            upForm.discription.value = debtor.discription
+            upForm.data.value = debtor.data
+            upForm.summa.value = debtor.summa
+            upForm._id.value = id 
+            upForm.currency.value = debtor.currency
+        }).catch(e=>console.error(e))
+    }
+
+</script>

@@ -1,0 +1,49 @@
+<div class="page-sidebar">
+    <ul class="list-unstyled accordion-menu">
+        <li {{#if isHome}}
+        class="active-page"
+        {{/if}}>
+            <a href="/"><i data-feather="home"></i>Главная</a>
+        </li>
+        <li class="sidebar-title">
+            Заказы
+        </li>
+        <li {{#if isCart}}class="active-page"{{/if}}>
+            <a href="/cart/"><i data-feather="clipboard"></i>Заказы</a>
+        </li>
+        <li {{#if isOneclick}}class="active-page"{{/if}}>
+            <a href="/oneclick/"><i data-feather="clipboard"></i>Заказы ONECLICK</a>
+        </li>
+        <li class="sidebar-title">
+            Управление
+        </li>
+        <li {{#if isCategory}}class="active-page"{{/if}}>
+            <a href="/category/"><i data-feather="list"></i>Категории</a>
+        </li>
+        <li {{#if isSubcategory}}class="active-page"{{/if}}>
+            <a href="/subcategory/"><i data-feather="align-center"></i>Субкатегории</a>
+        </li>
+        <li {{#if isBrend}}class="active-page"{{/if}}>
+            <a href="/brend/"><i data-feather="external-link"></i>Бренд</a>
+        </li>
+        <li {{#if isAtribut}}class="active-page"{{/if}}>
+            <a href="/atribut/"><i data-feather="cpu"></i>Атрибут</a>
+        </li>
+        <li {{#if isProducts}}class="active-page"{{/if}}>
+            <a href="/product/"><i data-feather="menu"></i>Продукты</a>
+        </li>
+        <li class="sidebar-title">
+            Финанс
+        </li>
+        <li {{#if isSpending}}class="active-page"{{/if}}>
+            <a href="/spending/"><i data-feather="dollar-sign"></i>Расходы</a>
+        </li>
+
+        <li class="sidebar-title">
+            Викторины
+        </li>
+        <li {{#if isViktorina}}class="active-page"{{/if}}>
+            <a href="/viktorina/"><i data-feather="gift"></i>Викторины</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,688 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center mb-4">
+                    <h5 class="card-title">{{title}}</h5>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newproduct">Добавить</button>
+                </div>
+
+                <div class="d-flex justify-content-end align-items-center mb-5">
+                    <div class="col-10">
+                        <form action="/product" method="get" name="search" class="d-flex justify-content-end">
+                            <input type="text" name="title" placeholder="Название" class="form-control me-2">
+                            <select  name="subcategory" class="form-select me-2" id="">
+                                <option selected="" disabled="" value="">Выберите субкатегории</option>
+                                {{#each subcategory}}
+                                    <option value="{{_id}}">{{title}}</option>
+                                {{/each}}
+                            </select>
+                            <a href="/product" class="btn btn-warning me-2">
+                                <i class="fas fa-sync-alt"></i>
+                            </a>
+                            <button class="btn btn-primary ml-1" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <table class="table table-hover" id="protable">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Название</th>
+                            <th scope="col">Субкатегория</th>
+                            <th scope="col">Бренд</th>
+                            <th scope="col">Цена</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col">Скидка</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyy">
+                        {{#each products}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td>
+                                <img src="/{{img}}" alt="" width="40">
+                                {{title}}
+
+                            </td>
+                            <td>{{subcategory.title}}</td>
+                            <td>{{brend.title}}</td>
+                            <td>{{price}} сум</td>
+                            <td>{{{status}}}</td>
+                            <td>{{{sale}}}</td>
+                            <td class="text-right">
+
+                                <a href="/product/more/{{_id}}" 
+                                    class="ml-2 btn btn-primary">
+                                        <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="/product/editproduct/{{_id}}" target="_blank"
+                                   class="ml-2 btn btn-warning">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+<!--                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upproduct" class="btn btn-warning ml-2">-->
+<!--                                    <i class="fas fa-pen"></i></button>-->
+                                <a href="/product/delete/{{_id}}" 
+                                    onclick="return confirm('Вы уверены?')" 
+                                    class="ml-2 btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <ul class="pagination ml-2" id="pag" data-count="{{count}}">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newproduct" tabindex="-1" aria-labelledby="newproduct" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить товара</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/product/" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="row">
+                        <input type="hidden" name="atribut" id="atribut">
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-sm-12 mb-3 form-floating padding">
+                            <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Наименование товара" required>
+                            <label for="floatingInput1">Наименование товара</label>
+                        </div>
+                        <div class="col-xl-6 col-sm-12 mb-3 form-floating padding">
+                            <input type="number" name="price" class="form-control" id="floatingInput1" placeholder="Цена" required>
+                            <label for="floatingInput1" class="pl-3">Цена</label>
+                        </div>
+                        <div class="col-xl-6 col-sm-12 form-floating padding">
+                            <select class="form-select" name="brend" id="floatingSelect1" aria-label="Floating label select example" required="">
+                                <option selected="" disabled="" value="">Выберите из списка</option>
+                                {{#each brend}}
+                                <option value="{{_id}}">{{title}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберите из списка
+                            </div>
+                            <label for="floatingSelect1">Бренд</label>
+                        </div>
+                        <div class="col-xl-6 col-sm-12 form-floating padding">
+                            <select class="form-select subcategory" name="subcategory" id="floatingSelect14" aria-label="Floating label select example" required="">
+                                <option selected="" disabled="" value="">Выберите из списка</option>
+                                {{#each subcategory}}
+                                <option value="{{_id}}">{{title}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберите из списка
+                            </div>
+                            <label for="floatingSelect14">Субкатегория</label>
+                        </div>
+
+                        <div class="row menyu mb-3">
+                            
+                        </div>
+                        
+                        <div class="col-xl-6 col-sm-12 form-floating padding">
+                            <select class="form-select" name="status" id="floatingSelect1" aria-label="Floating label select example" required="">
+                                <option selected="" disabled="" value="">Выберите из списка</option>
+                                <option value="0">Нет</option>
+                                <option value="1">Есть</option>
+                                <option value="2">Нет в наличие</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберите из списка
+                            </div>
+                            <label for="floatingSelect1 padding">Статус</label>
+                        </div>
+                        <div class="col-xl-6 col-sm-12 form-floating padding">
+                            <input type="number" name="order" class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>
+                            <label for="floatingInput1">Порядковый номер</label>
+                        </div>
+                        <div class="col-xl-3 col-sm-12 form-floating padding" >
+                            <div class="d-flex justify-content-center">
+                                <img src="" class="newimg1" alt="" width="70" height="70">
+                            </div>
+                            <div>
+                                <label for="formFileMultiple" class="form-label pt">Фото товара №1</label>
+                                <input class="form-control" onchange="loadFile1(event)" name="photo1" type="file" id="formFileMultiple" required="">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-12 form-floating padding" >
+                            <div class="d-flex justify-content-center">
+                                <img src="" class="newimg2" alt="" width="70" height="70">
+                            </div>
+                            <div>
+                                <label for="formFileMultiple2" class="form-label pt">Фото товара №2</label>
+                                <input class="form-control" onchange="loadFile2(event)" name="photo2" type="file" id="formFileMultiple2" >
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-12 form-floating padding" >
+                            <div class="d-flex justify-content-center">
+                                <img src="" class="newimg3" alt="" width="70" height="70">
+                            </div>
+                            <div>
+                                <label for="formFileMultiple3" class="form-label pt">Фото товара №3</label>
+                                <input class="form-control" onchange="loadFile3(event)" name="photo3" type="file" id="formFileMultiple3" >
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-sm-12 form-floating padding" >
+                            <div class="d-flex justify-content-center">
+                                <img src="" class="newimg4" alt="" width="70" height="70">
+                            </div>
+                            <div>
+                                <label for="formFileMultiple4" class="form-label pt">Фото товара №4</label>
+                                <input class="form-control" onchange="loadFile4(event)" name="photo4" type="file" id="formFileMultiple4" >
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-sm-12 form-floating padding" >
+                            <label for="textarea" class="form-label pt">Описание</label>
+                            <textarea name="descriptions" id="textarea" class="form-control mb-3"></textarea>
+                        </div>
+
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!--<div class="modal fade" id="upproduct" tabindex="-1" aria-labelledby="upproduct" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-xl">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Изменить продукть</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form action="/product/save" method="post" name="upproduct" enctype="multipart/form-data" class="needs-validation" novalidate>-->
+<!--                    <input type="hidden" name="_csrf" value="{{csrf}}">-->
+<!--                    <input type="hidden" name="_id" value="">-->
+<!--                    <div class="row">-->
+<!--                        <input type="hidden" name="atribut" id="editatribut">-->
+<!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-xl-6 col-sm-12 mb-3 form-floating padding">-->
+<!--                            <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Наименование товара" required>-->
+<!--                            <label for="floatingInput1">Наименование товара</label>-->
+<!--                        </div>-->
+<!--                        <div class="col-xl-6 col-sm-12 mb-3 form-floating padding">-->
+<!--                            <input type="number" name="price" class="form-control" id="floatingInput1" placeholder="Цена" required>-->
+<!--                            <label for="floatingInput1" class="pl-3">Цена</label>-->
+<!--                        </div>-->
+<!--                        <div class="col-xl-6 col-sm-12 form-floating padding">-->
+<!--                            <select class="form-select" name="brend" id="floatingSelect1" aria-label="Floating label select example" required="">-->
+<!--                                <option selected="" disabled="" value="">Выберите из списка</option>-->
+<!--                                {{#each brend}}-->
+<!--                                <option value="{{_id}}">{{title}}</option>-->
+<!--                                {{/each}}-->
+<!--                            </select>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Выберите из списка-->
+<!--                            </div>-->
+<!--                            <label for="floatingSelect1">Бренд</label>-->
+<!--                        </div>-->
+<!--                        <div class="col-xl-6 col-sm-12 form-floating padding">-->
+<!--                            <select class="form-select subcategory" name="subcategory" id="floatingSelect12" aria-label="Floating label select example" required="">-->
+<!--                                <option selected="" disabled="" value="">Выберите из списка</option>-->
+<!--                                {{#each subcategory}}-->
+<!--                                <option value="{{_id}}">{{title}}</option>-->
+<!--                                {{/each}}-->
+<!--                            </select>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Выберите из списка-->
+<!--                            </div>-->
+<!--                            <label for="floatingSelect12">Субкатегория</label>-->
+<!--                        </div>-->
+
+<!--                        <div class="row editmenu mb-3">-->
+<!--                        </div>-->
+<!--                        -->
+<!--                        <div class="col-xl-6 col-sm-12 form-floating padding">-->
+<!--                            <select class="form-select" name="status" id="floatingSelect1" aria-label="Floating label select example" required="">-->
+<!--                                <option selected="" disabled="" value="">Выберите из списка</option>-->
+<!--                                <option value="0">Нет</option>-->
+<!--                                <option value="1">Есть</option>-->
+<!--                                <option value="2">Деактив</option>-->
+<!--                            </select>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Выберите из списка-->
+<!--                            </div>-->
+<!--                            <label for="floatingSelect1 padding">Статус</label>-->
+<!--                        </div>-->
+<!--                        <div class="col-xl-6 col-sm-12 form-floating padding">-->
+<!--                            <input type="number" name="order" class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>-->
+<!--                            <label for="floatingInput1">Порядковый номер</label>-->
+<!--                        </div>-->
+
+<!--                        <div class="col-xl-3 col-sm-10 form-floating padding" >-->
+<!--                            <div  class="d-flex justify-content-center" >-->
+<!--                                <img src="" id="img1" alt="" width="50" height="50">-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="formFileMultiple" class="form-label pt">Фото товара №1</label>-->
+<!--                                <input class="form-control photo1" onchange="loadFileEdit1(event)" name="photo1"  type="file" id="formFileMultiple">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="col-xl-3 col-sm-12 form-floating padding" >-->
+<!--                            <div  class="d-flex justify-content-center" >-->
+<!--                                <img src="" id="img2" alt="" width="50" height="50">-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="formFileMultiple2" class="form-label pt">Фото товара №2</label>-->
+<!--                                <input class="form-control" onchange="loadFileEdit2(event)" name="photo2" type="file"   id="formFileMultiple2" >-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-xl-3 col-sm-12 form-floating padding" >-->
+<!--                            <div  class="d-flex justify-content-center" >-->
+<!--                                <img src="" id="img3" alt="" width="50" height="50">-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="formFileMultiple3" class="form-label pt">Фото товара №3</label>-->
+<!--                                <input class="form-control" onchange="loadFileEdit3(event)" name="photo3" type="file" id="formFileMultiple3" >-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="col-xl-3 col-sm-12 form-floating padding" >-->
+<!--                            <div  class="d-flex justify-content-center" >-->
+<!--                                <img src="" id="img4" alt="" width="50" height="50">-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <label for="formFileMultiple4" class="form-label pt">Фото товара №4</label>-->
+<!--                                <input class="form-control" onchange="loadFileEdit4(event)" name="photo4" type="file" id="formFileMultiple4" >-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-xl-12 col-sm-12 form-floating padding" >-->
+<!--                            <label for="textarea" class="form-label pt">Описание</label>-->
+<!--                            <textarea name="descriptions" id="textarea" class="form-control mb-3"></textarea>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Сохранить</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="modal-footer"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<style>
+    .padding {
+        padding: 5px;
+    }
+    #textarea {
+        height: 70px;
+    }
+    .form-label.pt {
+        top: -9px;
+        left: 4px;
+    }
+    .newimg1, .newimg2, .newimg3, .newimg4 {
+        display: none;
+    }
+
+</style>
+
+<script>
+const pagList = document.getElementById('pag')
+const pagCount = document.getElementById('pag').dataset.count
+
+
+for (let i = 1; i <= pagCount; i++) {
+    
+    pagList.innerHTML += `
+        <li class="page-item"><a class="page-link" href="/product/?pageNumber=${i}">${i}</a></li>
+    `
+}
+
+// Select for img
+//№1
+var loadFile1 = function(event) {
+    var newImg1 = document.querySelector('.newimg1');
+    newImg1.style.display = 'block';
+    // newImg1.style.height = 30;
+    newImg1.src = URL.createObjectURL(event.target.files[0]);
+};
+//№2
+var loadFile2 = function(event) {
+    var newImg2 = document.querySelector('.newimg2');
+    newImg2.style.display = 'block';
+    // newImg1.style.height = 30;
+    newImg2.src = URL.createObjectURL(event.target.files[0]);
+};
+//№3
+var loadFile3 = function(event) {
+    var newImg3 = document.querySelector('.newimg3');
+    newImg3.style.display = 'block';
+    // newImg1.style.height = 30;
+    newImg3.src = URL.createObjectURL(event.target.files[0]);
+};
+//№4
+var loadFile4 = function(event) {
+    var newImg4 = document.querySelector('.newimg4');
+    newImg4.style.display = 'block';
+    // newImg1.style.height = 30;
+    newImg4.src = URL.createObjectURL(event.target.files[0]);
+};
+
+    // for subcategory in atribut modal
+let inpSubcategory = document.querySelector(".subcategory")
+let menyu = document.querySelector(".menyu")
+let editmenyu = document.querySelector(".editmenu")
+let atribut = document.getElementById("atribut")
+let editatribut = document.getElementById("editatribut")
+let img1 = document.getElementById("img1")
+let img2 = document.getElementById("img2")
+let img3 = document.getElementById("img3")
+let img4 = document.getElementById("img4")
+
+let atributArrays = []
+
+let index = 1
+
+inpSubcategory.addEventListener('input', () => {
+    fetch(`/atribut/allatribut/${inpSubcategory.value}`)
+    .then(res => res.json())
+    .then(atribut => {
+        
+        menyu.innerHTML = ''
+        atribut.forEach(atr=> {
+            
+            let addDiv = document.createElement('div');
+            addDiv.className = 'col-xl-6 col-sm-12 form-floating padding';
+            menyu.appendChild(addDiv)
+            
+            let addSpan = document.createElement('span');
+            addSpan.className = 'form-group spann';
+            addSpan.setAttribute('data-index',index)
+            addDiv.appendChild(addSpan)
+            addSpan.innerHTML = `${atr.title}:`;
+
+            let addInput = document.createElement('input');
+            addInput.setAttribute('type','text')
+            addInput.setAttribute('data-index',index)
+            addInput.setAttribute('data-id',atr._id)
+            addInput.setAttribute('onblur', 'inputValue()')
+            addInput.className = 'form-control inputt';
+            addDiv.appendChild(addInput)
+
+            index++
+        })
+        
+    }).catch(e=>console.error(e))
+})
+
+
+function inputValue() {
+    atributArrays= []
+    let inputsValue = document.querySelectorAll('.inputt')
+    inputsValue.forEach(inp => {
+        atributArrays.push({
+            atr: inp.getAttribute('data-id'),
+            spec: inp.value
+        })
+    })
+    
+    atribut.value = JSON.stringify(atributArrays)
+
+}
+
+// function editInputValue() {
+//     atributArrays= []
+//     let editInputsValue = document.querySelectorAll('.editinputt')
+//     editInputsValue.forEach(inp => {
+//         atributArrays.push({
+//             atr: inp.getAttribute('data-id'),
+//             spec: inp.value
+//         })
+//     })
+//     editatribut.value = JSON.stringify(atributArrays)
+//
+//
+// }
+
+
+// // EDIT
+//
+// let upForm = document.forms.upproduct
+// function edit(id){
+//     fetch(`/product/edit/${id}`)
+//     .then(res => res.json())
+//     .then(product => {
+//
+//         upForm.title.value = product.title
+//         upForm.subcategory.value = product.subcategory
+//         upForm.brend.value = product.brend
+//         upForm.price.value = product.price
+//         upForm.order.value = product.order
+//         upForm._id.value = id
+//         upForm.atribut.value = JSON.stringify(product.atribut)
+//         upForm.descriptions.value = product.descriptions
+//         upForm.status.selected = (product.status == 0) ? upForm.status.value = 0 :
+//                 (product.status == 1) ? upForm.status.value = 1 : upForm.status.value = 2
+//
+//         if(product.atribut.length > 0) {
+//             editmenyu.innerHTML = ''
+//             product.atribut.forEach(atr=> {
+//
+//                 let addDiv = document.createElement('div');
+//                 addDiv.className = 'col-xl-6 col-sm-12 form-floating padding';
+//                 editmenyu.appendChild(addDiv)
+//
+//                 let addSpan = document.createElement('span');
+//                 addSpan.className = 'form-group spann';
+//                 addSpan.setAttribute('data-index',index)
+//                 addDiv.appendChild(addSpan)
+//                 addSpan.innerHTML = atr.atr.title;
+//
+//                 let addInput = document.createElement('input');
+//                 addInput.setAttribute('type','text')
+//                 addInput.setAttribute('data-index',index)
+//                 addInput.setAttribute('data-id',atr.atr._id)
+//
+//                 addInput.setAttribute('value', atr.spec)
+//                 addInput.className = 'form-control editinputt';
+//                 addInput.setAttribute('onblur', 'editInputValue()')
+//                 addDiv.appendChild(addInput)
+//
+//                 index++
+//
+//             })
+//         }
+//
+//         fetch(`/atribut/allatribut/${product.subcategory}`)
+//         .then(res => res.json())
+//         .then(atributs => {
+//             let needAtr = []
+//             atributs.forEach(atribut => {
+//                 let check = true
+//                     product.atribut.forEach(atr => {
+//                         if (atribut._id == atr.atr._id){
+//                             check = false
+//                         }
+//                     })
+//                     if (check){
+//                         needAtr.push(atribut)
+//                     }
+//             })
+//             needAtr.forEach(atr=> {
+//                 let addDiv = document.createElement('div');
+//                 addDiv.className = 'col-xl-6 col-sm-12 form-floating padding';
+//                 editmenyu.appendChild(addDiv)
+//
+//                 let addSpan = document.createElement('span');
+//                 addSpan.className = 'form-group spann';
+//                 addSpan.setAttribute('data-index',(product.atribut.length-1))
+//                 addDiv.appendChild(addSpan)
+//                 addSpan.innerHTML = atr.title;
+//
+//                 let addInput = document.createElement('input');
+//                 addInput.setAttribute('type','text')
+//                 addInput.setAttribute('data-index',(product.atribut.length-1))
+//                 addInput.setAttribute('data-id',atr._id)
+//
+//                 product.atribut.spec = product.atribut.spec || ''
+//                 addInput.setAttribute('value', product.atribut.spec)
+//                 addInput.className = 'form-control editinputt';
+//                 addInput.setAttribute('onblur', 'editInputValue()')
+//                 addDiv.appendChild(addInput)
+//             })
+//
+//         })
+//
+//         if (product.photos[0])
+//         img1.setAttribute('src',`/${product.photos[0]}`)
+//         if (product.photos[1]) {
+//             img2.setAttribute('src',`/${product.photos[1]}`)
+//         } else {
+//             img2.style.display = 'none'
+//         }
+//         if (product.photos[2]) {
+//             img3.setAttribute('src',`/${product.photos[2]}`)
+//         } else {
+//             img3.style.display = 'none'
+//         }
+//         if (product.photos[3]){
+//             img4.setAttribute('src',`/${product.photos[3]}`)
+//         } else {
+//             img4.style.display = 'none'
+//         }
+//
+//
+//     }).catch(e=>console.error(e))
+// }
+// // change edit img
+// // №1
+// var loadFileEdit1 = function(event) {
+//     img1.style.display = 'block';
+//     // newImg1.style.height = 30;
+//     img1.src = URL.createObjectURL(event.target.files[0]);
+// };
+// // №2
+// var loadFileEdit2 = function(event) {
+//     img2.style.display = 'block';
+//     // newImg1.style.height = 30;
+//     img2.src = URL.createObjectURL(event.target.files[0]);
+// };
+// // №3
+// var loadFileEdit3 = function(event) {
+//     img3.style.display = 'block';
+//     // newImg1.style.height = 30;
+//     img3.src = URL.createObjectURL(event.target.files[0]);
+// };
+// // №4
+// var loadFileEdit4 = function(event) {
+//     img4.style.display = 'block';
+//     // newImg1.style.height = 30;
+//     img4.src = URL.createObjectURL(event.target.files[0]);
+// };
+
+
+// SEARCH
+
+// let searchform = document.forms.search
+// let protable = document.getElementById('protable')
+// searchform.addEventListener('submit',async (e)=>{
+//     e.preventDefault()
+//     let formData = new FormData(searchform)
+//     let searchQuery = {}
+//     formData.forEach((value,name)=>{
+//         searchQuery[name] = value
+//     })
+//     protable.innerHTML = '<thead><tr><th scope="col">Название</th><th scope="col">Субкатегория</th><th scope="col">Бренд</th><th scope="col">Цена</th><th scope="col">Статус</th><th scope="col"></th></tr></thead>'
+//
+//     const res = await fetch('/product/api/search?'+ new URLSearchParams(searchQuery))
+//     .then(res => res.json())
+//     .then(data => {
+//         data.forEach(product=> {
+//
+//             protable.innerHTML += `
+//                 <tr>
+//                     <td>
+//                         <img src="/${product.img}" alt="" width="40">
+//                         ${product.title}
+//                     </td>
+//                     <td>${product.subcategory.title}</td>
+//                     <td>${product.brend.title}</td>
+//                     <td>${product.price} сум</td>
+//                     <td>${product.status}</td>
+//                     <td class="text-right">
+//                         <a href="/product/more/${product._id}"
+//                             class="ml-2 btn btn-primary">
+//                                 <i class="fas fa-eye"></i>
+//                         </a>
+//                         <button onclick="edit('${product._id}')" data-bs-toggle="modal" data-bs-target="#upproduct" class="btn btn-warning ml-2">
+//                             <i class="fas fa-pen"></i></button>
+//                         <a href="/product/delete/${product._id}"
+//                             onclick="return confirm('Вы уверены?')"
+//                             class="ml-2 btn btn-danger">
+//                                 <i class="fas fa-trash"></i>
+//                         </a>
+//                     </td>
+//                 </tr>
+//             `
+//         })
+//
+//     })
+//
+// })
+
+
+//RESET
+
+// searchform.addEventListener('reset',async (e)=>{
+//         const res = await fetch('/product/api/allproduct')
+//         const data = await res.json()
+//         protable.innerHTML = ''
+//
+//         protable.innerHTML = '<thead><tr><th scope="col">Название</th><th scope="col">Субкатегория</th><th scope="col">Бренд</th><th scope="col">Цена</th><th scope="col">Статус</th><th scope="col"></th></tr></thead>'
+//
+//         data.forEach(product=> {
+//
+//             protable.innerHTML += `
+//                 <tr>
+//                     <td>
+//                         <img src="/${product.img}" alt="" width="40">
+//                         ${product.title}
+//                     </td>
+//                     <td>${product.subcategory.title}</td>
+//                     <td>${product.brend.title}</td>
+//                     <td>${product.price} сум</td>
+//                     <td>${product.status}</td>
+//                     <td class="text-right">
+//                         <a href="/product/more/${product._id}"
+//                             class="ml-2 btn btn-primary">
+//                                 <i class="fas fa-eye"></i>
+//                         </a>
+//                         <button onclick="edit('${product._id}')" data-bs-toggle="modal" data-bs-target="#upproduct" class="btn btn-warning ml-2">
+//                             <i class="fas fa-pen"></i></button>
+//                         <a href="/product/delete/${product._id}"
+//                             onclick="return confirm('Вы уверены?')"
+//                             class="ml-2 btn btn-danger">
+//                                 <i class="fas fa-trash"></i>
+//                         </a>
+//                     </td>
+//                 </tr>
+//             `
+//         })
+//     })
+
+</script>

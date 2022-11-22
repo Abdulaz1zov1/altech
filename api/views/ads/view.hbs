@@ -1,0 +1,58 @@
+ <div class="carousel_main">
+        <div class="container">
+            <div class="row f-wrap">
+                <div class="col-xl-6">
+                    <div class="car_left">
+                        <img src="/{{ads.img}}" alt="">
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="car_right">
+                        <h1>{{ads.title}}</h1>
+                        <p><img src="/images/pen.png" alt=""> {{ads.title}}</p>
+                        <div class="descr_slide">
+                            <div class="pr_descr d-flex justify-content-between align-items-center">
+                                <h2>{{ads.price}} сум<span>(дог.)</span></h2>
+                                <a href="#" class="add_izb">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    Добавить в избранное
+                                </a>
+                            </div> 
+                            <div class="butch">
+                                <p><img src="/images/icon1.png" alt="">{{ads.place}}   </p>
+                                <p><img src="/images/clock.png" alt="">Добавлено: {{ads.createdAt}}   -    Обновлено: 19.12.18 в 22:23</p>
+                                <p><img src="/images/glob.png" alt=""><b>{{ads.userId.name}}</b>   <a href="#">Все объявления пользователя</a></p>
+                                <p><b>Описание товара:</b></p>
+                                <p>{{ads.text}}</p>
+                                <a href="#" class="number_new">Номер объявления: {{ads._id}}</a>
+                                <div class="desc_btm_link">
+                                    <span><img src="/images/phone.png" alt="">{{ads.userId.phone}}<a href="#">Показать</a></span>
+                                    <a href="#" class="write_to_avtor"><img src="/images/mail.png" alt="">Написать автору</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="similar_list" style="display: none;">
+                <h3><span>Похожие объявления</span></h3>
+                <div class="item_prod">
+                    <a href="#" class="img"></a>
+                    <div class="text">
+                        <div class="prod_price">
+                            <p>220000000 </p><span>сум/шт</span>
+                        </div>
+                        <a href="#" class="title">Продаю новый трактор BELARUS-1523</a>
+                        <p class="two_text">Трактор предназначен для выполнения различных сельскохозяйственных работ общего назначения, основной и предпосевной обработки почвы, посева в составе широкозахватных и комбинированных агрегатов, уборочных составе высокопроизводительных уборочных комплексов, транспортных работ. Мощность</p>
+                        <p class="company_name">Компания: <b>ЧП "PLANETA SERVIS"</b></p>
+                        <span class="adress_pr"><img src="/images/map_mar.png" alt="">Ташкент, Шайхантахурский район</span>
+                        <span class="adress_pr"><img src="/images/clock.png" alt="">Вчера 23:25</span>
+                        <a href="#" class="razd_star"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>

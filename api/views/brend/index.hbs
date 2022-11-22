@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center">
+                    <h5 class="card-title">{{title}}</h5>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newbrend">Добавить</button>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col"></th>
+                            <th scope="col">Название</th>
+                            <th scope="col">На главном списки</th>
+                            <th scope="col">Топ</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col" class="text-center">Порядковый номер</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each brend}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td><img src="/{{img}}" alt="" width="70"></td>
+                            <td>{{title}}</td>
+                            <td>{{{home}}}</td>
+                            <td>{{{top}}}</td>
+                            <td>{{{status}}}</td>
+                            <td class="text-center">{{order}}</td>
+                            <td class="text-right">
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upbrend" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/brend/delete/{{_id}}" 
+                                    onclick="return confirm('Вы уверены?')" 
+                                    class="ml-2 btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newbrend" tabindex="-1" aria-labelledby="newbrend" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить бренд</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/brend/" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название категории" required>
+                        <label for="floatingInput1">Название бренд</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>
+                        <label for="floatingInput1">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-floating " >
+                        <div class="d-flex justify-content-center">
+                            <img src="" class="newimg1" alt="" width="70" height="70">
+                        </div>
+                        <div>
+                            <label for="formFileMultiple" class="form-label pt">Фотография категории</label>
+                            <input class="form-control" onchange="loadFile1(event)" name="img" type="file" id="formFileMultiple" >
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Активный</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="home" value="1" class="form-check-input" checked id="home">
+                        <label class="form-check-label" for="home">На главном</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="top" value="1" class="form-check-input" checked id="top">
+                        <label class="form-check-label" for="top">Топ</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upbrend" tabindex="-1" aria-labelledby="upbrend" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Изменить бренд</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/brend/save" method="post" name="upbrend" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название категории" required>
+                        <label for="floatingInput1">Название бренд</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>
+                        <label for="floatingInput1">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-floating " >
+                        <div class="d-flex justify-content-center">
+                            <img src="" class="newimg2" alt="" width="70" height="70">
+                        </div>
+                        <div>
+                            <label for="formFileMultiple" class="form-label pt">Фотография</label>
+                            <input class="form-control" onchange="loadFile2(event)" name="img" type="file" id="formFileMultiple" >
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck2">
+                        <label class="form-check-label" for="exampleCheck2">Активный</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="home" value="1" class="form-check-input" checked id="home">
+                        <label class="form-check-label" for="home">На главном</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="top" value="1" class="form-check-input" checked id="top">
+                        <label class="form-check-label" for="top">Топ</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let upForm = document.forms.upbrend
+    const edit = (id) => {
+        fetch(`/brend/getone/${id}`)
+        .then(res => res.json())
+        .then(brend => {
+            upForm.title.value = brend.title
+            upForm.order.value = brend.order
+            upForm._id.value = id
+            upForm.status.checked = brend.status == 1 ? true : false
+            upForm.top.checked = brend.top == 1 ? true : false
+            upForm.home.checked = brend.home == 1 ? true : false
+        }).catch(e=>console.error(e))
+    }
+
+    var loadFile1 = function(event) {
+        var newImg1 = document.querySelector('.newimg1');
+        newImg1.style.display = 'block';
+        // newImg1.style.height = 30;
+        newImg1.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFile2 = function(event) {
+        var newImg1 = document.querySelector('.newimg2');
+        newImg1.style.display = 'block';
+        // newImg1.style.height = 30;
+        newImg1.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>

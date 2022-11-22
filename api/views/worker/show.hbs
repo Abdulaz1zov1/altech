@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center pr-1 mb-2">
+                    <a href="/worker/" 
+                        class="ml-2 btn btn-primary mr-2">
+                            <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h5 class="card-title ml-2 mb-0">Сотрудник: {{worker.name}} {{worker.lname}} - <b>{{worker.lvl}}</b></h5>
+                    <h5 class="card-title ms-auto mb-0">Общая оплаченная зарплата: <b>{{summa}} {{worker.current}}</b></h5>
+                    
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Месяц</th>
+                        <th scope="col">Значение оплаты</th>
+                        <th scope="col">Добавлено</th>
+
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each worker.history}}
+                        <tr>
+                            <td>{{date}}</td>
+                            <td>{{getsalary}} {{worker.current}}</td>
+                            <td>{{createdAt}} </td>
+                            <td class="text-right">
+                                <a href="/worker/salary/{{@root.id}}/{{@index}}"
+                                    onclick="return confirm('Вы уверены?')"
+                                    class="ml-2 btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="salary" tabindex="-1" aria-labelledby="salary" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить оплату зарплаты</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/worker/salary" method="post">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <div class="mb-3 form-floating">
+                            <select class="form-select" name="_id" id="floatingSelect1" aria-label="Floating label select example" required="">
+                                <option selected="" disabled="" value="">Выберите из списка</option>
+                                {{#each workers}}
+                                    <option value="{{_id}}">{{name}} {{lname}} - {{lvl}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберите из списка
+                            </div>
+                            <label for="floatingSelect1">Сотрудник</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <div class="mb-3 form-floating">
+                            <select class="form-select" name="type" id="floatingSelect1" aria-label="Floating label select example" required="">
+                                <option selected="" disabled="" value="">Выберите из списка</option>
+                                <option value="0">Аванс</option>
+                                <option value="0">Оклад</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберите из списка
+                            </div>
+                            <label for="floatingSelect1">Тип оплаты</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="month" name="date" class="form-control" id="floatingInput1" placeholder="Оплата за" required>
+                        <label for="floatingInput1">Оплата за</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="getsalary" class="form-control" id="floatingInput1" placeholder="Значение оплаты" required>
+                        <label for="floatingInput1">Значение оплаты</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    let form = document.forms.editform
+    function edit(id){
+        fetch(`/worker/get/${id}`)
+                .then(res => res.json())
+                .then(worker => {
+                    form.name.value = worker.name
+                    form._id.value = worker._id
+                    form.lname.value = worker.lname
+                    form.lvl.value = worker.lvl
+                    form.salary.value = worker.salary
+                    form.phone.value = worker.phone
+                    form.phone_res.value = worker.phone_res || ''
+                })
+    }
+</script>

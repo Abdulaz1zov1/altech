@@ -1,0 +1,36 @@
+/* Write your custom CSS here */
+
+
+.toast {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    overflow: hidden;
+}
+.badge.status-0{
+    background-color: #ee6e83!important;
+    color: #fff;
+}
+.badge.status-0,
+.badge.status-1{
+    display: inline-block;
+    
+}
+.badge.status-1{
+    background-color: #6bcac2!important;
+    color: #fff;
+}
+.badge.status-1:before {
+    content: 'Активный';
+    
+}
+.badge.status-0:before {
+    content: 'Скрыто';
+}
+.text-right {
+    text-align: right;
+}
+.ml-2 {
+    margin-left: 1rem;
+}
+

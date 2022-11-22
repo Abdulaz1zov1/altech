@@ -1,0 +1,323 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center pr-1 mb-5">
+                    <h5 class="card-title mb-0">Список работников</h5>
+                    <div class="d-flex  align-items-center">
+                        <form action="/worker" method="get" class="d-flex">
+                            <select name="status" class="form-select filtr month" id="month">
+                                <option selected="" disabled="" value="">Выберите статус</option>
+                                <option value="-1">Все</option>
+                                <option value="0">Уволенные</option>
+                                <option value="1">В отпуске</option>
+                                <option value="2">Работают</option>
+                            </select>
+                            <select name="month" class="form-select filtr month ml-2" id="month">
+                                <option selected="" disabled="" value="">Выберите месяц</option>
+                                <option value="0">Январ</option>
+                                <option value="1">Феврал</option>
+                                <option value="2">Март</option>
+                                <option value="3">Aпрел</option>
+                                <option value="4">Май</option>
+                                <option value="5">Июн</option>
+                                <option value="6">Июл</option>
+                                <option value="7">Aвгуст</option>
+                                <option value="8">Сентабр</option>
+                                <option value="9">Октабр</option>
+                                <option value="10">Ноябр</option>
+                                <option value="11">Декабр</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary ml-2"><i class="fas fa-search"></i></button>
+                        </form>
+                        <a href="/worker/excell" class="btn btn-primary ml-2 mr-2 excell-btn">Excell
+                            <i class="fas fa-file ml-2"></i>
+                        </a>
+                        <button class="btn btn-primary ml-2" data-bs-toggle="modal" data-bs-target="#salary">Новая оплата</button>
+                        <button class="btn btn-info ml-2" data-bs-toggle="modal" data-bs-target="#newcat">Новый сотрудник</button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center pr-1">
+                    <h5>Месяц: <b>{{monthRes}}</b></h5>
+                    <div class="d-flex align-items-center">
+                        <h5 class="card-title ml-2">Обшая зарплата: <b>{{mustSummaMonth}} сум</b></h5>
+                        <h5 class="card-title ml-2">Нужно оплатить: <b>{{resSummaMonth}} сум</b></h5>
+                        <h5 class="card-title ml-2">Оплачено: <b>{{allSummaMonth}} сум</b></h5>
+                    </div>
+
+                </div>
+                <div class="d-flex justify-content-end align-items-center pr-1 mb-5">
+                    <h5 class="card-title ml-2 mb-2">Обшая зарплата: <b>{{mustSummaMonthDollar}} $</b></h5>
+                    <h5 class="card-title ml-2 mb-2">Нужно оплатить: <b>{{resSummaMonthDollar}} $</b></h5>
+                    <h5 class="card-title ml-2 mb-2">Оплачено: <b>{{allSummaMonthDollar}} $</b></h5>
+                </div>
+                
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Номер телефона</th>
+                        <th scope="col">Должность</th>
+                        <th scope="col">Зарплата</th>
+                        <th scope="col">Оплачено за месяц</th>
+                        <th scope="col">Остатка за месяц</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each workers}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td>{{name}} {{lname}}</td>
+                            <td>{{phone}}</td>
+                            <td>{{lvl}}</td>
+                            <td>{{salary}} {{current}}</td>
+                            <td>{{all}} {{current}}</td>
+                            <td>{{must}} {{current}}</td>
+                            <td class="text-right">
+                                <a href="/worker/show/{{_id}}" class="btn btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button class="btn btn-warning ml-2" data-bs-toggle="modal" data-bs-target="#update"
+                                        onclick="edit('{{_id}}')">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/worker/delete/{{_id}}"
+                                   onclick="return confirm('Вы уверены?')"
+                                   class="ml-2 btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="salary" tabindex="-1" aria-labelledby="salary" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить оплату зарплаты</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/worker/salary" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <div class="mb-3 form-floating">
+                            <select class="form-select salaryworker" name="_id" id="floatingSelect1" aria-label="Floating label select example" required>
+                                <option selected="" disabled="" value="">Выберите из списка</option>
+                                {{#each workers}}
+                                    <option value="{{_id}}">{{name}} {{lname}} - {{lvl}}</option>
+                                {{/each}}
+                            </select>
+                            <div class="invalid-feedback">
+                                Выберите из списка
+                            </div>
+                            <label for="floatingSelect1">Сотрудник</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="month" name="date" class="form-control" id="floatingInput1" placeholder="Оплата за" required>
+                        <label for="floatingInput1">Оплата за</label>
+                    </div>
+                    <div class="row  form-floating">
+                        <div class="col-10 mb-3 form-floating">
+                            <input type="number" name="getsalary" class="form-control" id="floatingInput1" placeholder="Значение оплаты" required>
+                            <label class="paddingng" for="floatingInput1">Значение оплаты</label>
+                        </div>
+                        <div class="col-2 mb-3 form-floating currency d-flex align-items-center justify-content-center"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="newcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить сотрудника</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/worker/" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="name" class="form-control" id="floatingInput1" placeholder="Имя" required>
+                        <label for="floatingInput1">Имя</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="lname" class="form-control" id="floatingInput1" placeholder="Фамилия" required>
+                        <label for="floatingInput1">Фамилия</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="lvl" class="form-control" id="floatingInput1" placeholder="Должность" required>
+                        <label for="floatingInput1">Должность</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="phone" class="form-control" id="floatingInput1" placeholder="890-xxx-xx-xx" required>
+                        <label for="floatingInput1">Номер телефона (890-xxx-xx-xx)</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="phone_res" class="form-control" id="floatingInput1" placeholder="Номер телефона">
+                        <label for="floatingInput1">Запасной номер телефон</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="salary" class="form-control" id="floatingInput1" placeholder="Зарплата" required>
+                        <label for="floatingInput1">Зарплата</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="current" id="floatingSelect1" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Сум</option>
+                            <option value="1">$</option>
+                        </select>
+                        <label for="floatingSelect1">Выберите валюта</label>
+                    </div>
+                    <div class="mb-3 form-floating padding">
+                        <select class="form-select" name="status" id="floatingSelect1" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Уволен</option>
+                            <option value="1">Отпуск</option>
+                            <option value="2">Работает</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect1 padding">Статус</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update" tabindex="-1" aria-labelledby="update" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактировать сотрудника</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/worker/save" method="post" name="editform" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="name" class="form-control" id="floatingInput1" placeholder="Имя" required>
+                        <label for="floatingInput1">Имя</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="lname" class="form-control" id="floatingInput1" placeholder="Фамилия" required>
+                        <label for="floatingInput1">Фамилия</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="lvl" class="form-control" id="floatingInput1" placeholder="Должность" required>
+                        <label for="floatingInput1">Должность</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="phone" class="form-control" id="floatingInput1" placeholder="890-xxx-xx-xx" required>
+                        <label for="floatingInput1">Номер телефона (890-xxx-xx-xx)</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="phone_res" class="form-control" id="floatingInput1" placeholder="Номер телефона">
+                        <label for="floatingInput1">Запасной номер телефон</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="salary" class="form-control" id="floatingInput1" placeholder="Зарплата" required>
+                        <label for="floatingInput1">Зарплата</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="current" id="floatingSelect1" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Сум</option>
+                            <option value="1">$</option>
+                        </select>
+                        <label for="floatingSelect1">Выберите валюта</label>
+                    </div>
+                    <div class="mb-3 form-floating padding">
+                        <select class="form-select" name="status" id="floatingSelect1" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Уволен</option>
+                            <option value="1">Отпуск</option>
+                            <option value="2">Работает</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect1 padding">Статус</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .paddingng {
+        margin-left: 10px;
+    }
+    .otchet {
+        margin-left: 50px;
+    }
+    .excell-btn:hover {
+        background-color: green;
+        color: white
+    }
+    .filtr {
+        width: 250px ;
+    }
+
+</style>
+
+<script>
+    let salaryWorker = document.querySelector('.salaryworker')
+    let currency = document.querySelector('.currency')
+    let form = document.forms.editform
+    function edit(id){
+        fetch(`/worker/get/${id}`)
+        .then(res => res.json())
+        .then(worker => {
+            form.name.value = worker.name
+            form._id.value = worker._id
+            form.lname.value = worker.lname
+            form.lvl.value = worker.lvl
+            form.status.value = worker.status
+            form.salary.value = worker.salary
+            form.phone.value = worker.phone
+            form.current.value = worker.current
+            form.phone_res.value = worker.phone_res || ''
+        })
+    }
+
+    salaryWorker.addEventListener('change', (e)=> {
+        let workerId = e.target.value;
+        fetch(`/worker/getcurrent/${workerId}`)
+        .then(res => res.json())
+        .then(worker => {
+            console.log(worker.current)
+            if (worker.current == 0) {
+
+                currency.innerHTML = "Сум"
+            } else if (worker.current == 1) {
+
+                currency.innerHTML = "$"
+            }
+        })
+
+    })
+</script>

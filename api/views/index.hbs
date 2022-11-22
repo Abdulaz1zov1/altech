@@ -1,0 +1,109 @@
+
+  <div class="row">
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-widget">
+        <div class="card-body">
+          <h5 class="card-title">Продукты</h5>
+          <h2>{{productCount}}</h2>
+          <p>Общая количество</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-widget">
+        <div class="card-body">
+          <h5 class="card-title">Категории</h5>
+          <h2>{{categoryCount}}</h2>
+          <p>Общая количество</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-widget">
+        <div class="card-body">
+          <h5 class="card-title">Бренд</h5>
+          <h2>{{brendCount}}</h2>
+          <p>Общая количество</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-widget">
+        <div class="card-body">
+          <h5 class="card-title">Сотрудники</h5>
+          <h2>{{workerCount}}</h2>
+          <p>Общая количество</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-lg-8">
+      <div class="card table-widget">
+        <div class="card-body">
+          <h5 class="card-title">Последные продукты</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Название</th>
+                      <th scope="col">Субкатегория</th>
+                      <th scope="col">Бренд</th>
+                      <th scope="col">Цена</th>
+                      <th scope="col">Статус</th>
+                  </tr>
+              </thead>
+              <tbody class="tbodyy">
+                  {{#each productlist}}
+                  <tr>
+                      <td>
+                          <img src="/{{img}}" alt="" width="40">
+                          {{title}}
+
+                      </td>
+                      <td>{{subcategory.title}}</td>
+                      <td>{{brend.title}}</td>
+                      <td>{{price}} сум</td>
+                      <td>{{{status}}}</td>
+                  </tr>
+                  {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-sm-12 col-md-4">
+      <div class="card stat-widget">
+        <div class="card-body">
+          <h5 class="card-title">Список брендов</h5>
+          {{#each brendlist}}
+          <div class="transactions-list">
+            <div class="tr-item">
+              <div class="tr-company-name">
+                <div class="tr-icon tr-card-icon tr-card-bg-primary text-primary">
+                  <i data-feather="external-link"></i>
+                  
+                </div>
+                <div class="tr-text">
+                  <a href="#">
+                    <h4>{{title}}</h4>
+                  </a>
+                  <p>{{phone}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>

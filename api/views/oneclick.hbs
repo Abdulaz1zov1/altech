@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex mb-3">
+                    <h5 class="card-title">{{title}}</h5>
+                </div>
+                <table class="table table-hover" id="protable">
+                    <thead>
+                    <tr>
+                        <th scope="col">Имя получателя</th>
+                        <th scope="col">Номер телефона</th>
+                        <th scope="col">Продукт</th>
+                        <th scope="col">Aдрес</th>
+                        <th scope="col">Время заказа</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbodyy">
+
+                    {{#each carts}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{phone}}</td>
+                            <td>
+                                <span>{{product.title}}</span>.
+                            </td>
+                            <td>{{address}}</td>
+                            <td>{{createdAt}}</td>
+                            <td>{{{status}}}</td>
+                            <td class="text-right">
+
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upclick" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/oneclick/delete/{{_id}}" onclick="return confirm('Вы уверены БОВО???')" class="btn btn-danger ml-2">
+                                    <i class="fas fa-times"></i></a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="upclick" tabindex="-1" aria-labelledby="upcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактировать</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/oneclick/save" method="post" name="upcate">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="name" class="form-control" id="floatingInput1" placeholder="Имя получателя" required>
+                        <label for="floatingInput1">Имя получателя</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="phone" class="form-control" id="floatingInput1" placeholder="Номер телефона" required>
+                        <label for="floatingInput1">Номер телефона</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="address" class="form-control" id="floatingInput1" placeholder="Адрес" required>
+                        <label for="floatingInput1">Адрес</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck2">
+                        <label class="form-check-label" for="exampleCheck2">Активный</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let upForm = document.forms.upcate
+    const edit = (id) => {
+        fetch(`/oneclick/get/${id}`)
+                .then(res => res.json())
+                .then(category => {
+                    upForm._id.value = category._id
+                    upForm.phone.value = category.phone || ''
+                    upForm.name.value = category.name || ''
+                    upForm.address.value = category.address || ''
+                    upForm.product.value = category.product
+                    upForm.status.checked = category.status == 1 ? true : false
+                }).catch(e=>console.error(e))
+    }
+
+</script>

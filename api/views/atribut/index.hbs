@@ -1,0 +1,230 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center">
+                    <h5 class="card-title">{{title}}</h5>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newatr">Добавить</button>
+                </div>
+
+                <div class="d-flex justify-content-end align-items-center mt-3 mb-5">
+                    <div class="col-4">
+                        <form name="searchatribut" class="d-flex justify-content-end">
+                            <select name="subcategory" class="form-select me-2" id="">
+                                <option selected="" disabled="" value="">Выберите категории</option>
+                                {{#each subcategory}}
+                                    <option value="{{_id}}">{{title}}</option>
+                                {{/each}}
+                            </select>
+                            <button class="btn btn-warning me-2" type="reset">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button class="btn btn-primary ml-1" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <table class="table table-hover" id="protable">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Название</th>
+                            <th scope="col">Субкатегории</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col" class="text-center">Порядковый номер</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each atribut}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td>{{title}}</td>
+                            <td>{{subcategory.title}}</td>
+                            <td>{{{status}}}</td>
+                            <td class="text-center">{{order}}</td>
+                            <td class="text-right">
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upatr" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+<!--                                <a href="/atribut/delete/{{_id}}"-->
+<!--                                   onclick="return confirm('Вы уверены?')"-->
+<!--                                   class="ml-2 btn btn-danger">-->
+<!--                                    <i class="fas fa-trash"></i>-->
+<!--                                </a>-->
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newatr" tabindex="-1" aria-labelledby="newatr" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить категории</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/atribut/" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="subcategory" id="floatingSelect111" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            {{#each subcategory}}
+                            <option value="{{_id}}">{{title}}</option>
+                            {{/each}}
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect111">Субкатегория</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInputatribut" placeholder="Название категории" required>
+                        <label for="floatingInputatribut">Название атрибут</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInputatribut1" placeholder="Порядковый номер" required>
+                        <label for="floatingInputatribut1">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck111">
+                        <label class="form-check-label" for="exampleCheck111">Активный</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upatr" tabindex="-1" aria-labelledby="upatr" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Изменить атрибут</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/atribut/save" method="post" name="upatr" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="subcategory" id="floatingInputatribut3" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            {{#each subcategory}}
+                            <option value="{{_id}}">{{title}}</option>
+                            {{/each}}
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingInputatribut3">Субкатегория</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInputatribut4" placeholder="Название категории" required>
+                        <label for="floatingInputatribut4">Название атрибут</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInputatribut5" placeholder="Порядковый номер" required>
+                        <label for="floatingInputatribut5">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck2">
+                        <label class="form-check-label" for="exampleCheck2">Активный</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let upForm = document.forms.upatr
+    const edit = (id) => {
+        fetch(`/atribut/${id}`)
+        .then(res => res.json())
+        .then(atribut => {
+            upForm.title.value = atribut.title
+            upForm.subcategory.value = atribut.subcategory
+            upForm.order.value = atribut.order
+            upForm._id.value = id 
+            upForm.status.checked = atribut.status == 1 ? true : false
+        }).catch(e=>console.error(e))
+    }
+
+// SEARCH
+
+    let searchformatribut = document.forms.searchatribut
+    let protable = document.getElementById('protable')
+    searchformatribut.addEventListener('submit',async (e)=>{
+        e.preventDefault()
+        let formData = new FormData(searchformatribut)
+        let searchQuery = {}
+        formData.forEach((value,name)=>{
+            searchQuery[name] = value
+        })
+        protable.innerHTML = '<thead><tr><th scope="col">Название</th><th scope="col">Субкатегория</th><th scope="col">Статус</th><th scope="col" class="text-center">Порядковый номер</th></thead>'
+        
+        const res = await fetch('/atribut/api/search?'+ new URLSearchParams(searchQuery))
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(atribut=> {
+                console.log(atribut)
+                protable.innerHTML += `
+                    <tr>
+                        <td>
+                            ${atribut.title}
+                        </td>
+                        <td>${atribut.subcategory.title}</td>
+                        <td>${atribut.status}</td>
+                        <td class="text-center">${atribut.order}</td>
+                        <td class="text-right">
+                            <button onclick="edit('${atribut._id}')" data-bs-toggle="modal" data-bs-target="#upatr" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `
+            })
+            
+        })
+
+    })
+
+
+//RESET
+
+    searchformatribut.addEventListener('reset',async (e)=>{
+        const res = await fetch('/atribut/api/allatribut')
+        const data = await res.json()
+        protable.innerHTML = ''
+        
+        protable.innerHTML = '<thead><tr><th scope="col">Название</th><th scope="col">Субкатегория</th><th scope="col">Статус</th></thead>'
+        data.forEach(atribut=> {
+
+            protable.innerHTML += `
+                <tr>
+                    <td>
+                        ${atribut.title}
+                    </td>
+                    <td>${atribut.subcategory.title}</td>
+                    <td>${atribut.status}</td>
+                    <td>${atribut.order}</td>
+                    <td class="text-right">
+                        <button onclick="edit('${atribut._id}')" data-bs-toggle="modal" data-bs-target="#upatr" class="btn btn-warning ml-2">
+                                <i class="fas fa-pen"></i>
+                        </button>
+                    </td>
+                </tr>
+            `
+        })
+    })
+
+</script>

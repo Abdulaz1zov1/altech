@@ -1,0 +1,167 @@
+{{> profile}}
+<div class="placing">
+        <div class="container">
+            <h1>Размещмение товара или услуги</h1>
+            <form action="/ads/" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="{{csrf}}">
+                <input type="hidden" name="userId" value="{{user._id}}">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 top_form">
+                    <div class="form_group d-flex justify-content-between">
+                        <label for="">Выберите категорию <span>*</span></label>
+                        <select name="categoryId" id=""  data-toggle="tooltip" data-placement="right" title="Информационное сообщение с подсказкой будет выводится во всплывающем блоке типа tooltip. И поможет пользователю сориентироваться с полями.">
+                            {{#each category}}
+                                <option value="{{_id}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form_group d-flex justify-content-between">
+                        <label for="">Город или Регион <span>*</span></label>
+                        <input type="text" name="place" required value="Ташкентская область">
+                    </div>
+                    <div class="form_group d-flex justify-content-between">
+                        <label for="">Тип объявления <span>*</span></label>
+                        <select name="type" id="">
+                            <option value="0">Тип - 1</option>
+                            <option value="1">Тип - 2</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_group">
+                        <label for="">Заголовок объявления <span>*</span></label>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="form_group">
+                                <label for="">Состояние</label>
+                                <select name="state" id="">
+                                    <option value="">Выбрать </option>
+                                    <option value="">Выбрать 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="form_group">
+                                <label for="">Частное лицо/Бизнес</label>
+                                <select name="seller" id="">
+                                    <option value="0">Частное лицо</option>
+                                    <option value="1">Бизнес</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="form_group">
+                                <label for="">Наличие</label>
+                                <select name="stock" id="">
+                                    <option value="0">Есть в наличие </option>
+                                    <option value="1">Нет в наличие</option>
+                                    <option value="2">На заказ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="form_group">
+                                <label for="">Стоимость</label>
+                                <input type="text" name='price' required value="">
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="form_group">
+                                <label class="hide_text">hide_text</label>
+                                <select name="currency" id="">
+                                    <option value="0">Сум</option>
+                                    <option value="1">Доллар</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form_group dogovor">
+                                <input type="checkbox" name="sale" id="dfgt" value="1">
+                                <label for="dfgt">Договорная</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form_group">
+                        <label for="">Описание <span>*</span></label>
+                        <textarea name="text" required id="" cols="30" rows="10"></textarea>                    
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="upd_new">
+                <h5>Фотографии объявления</h5>
+                <p>Объявления с фото получают в среднем в 3-5 раз больше откликов. Первое изображение будет являть основным фото вашего объявления</p>
+                <div class="row form-group upload-photo">
+                    <div class="col-6 col-xl-2 col-lg-2">
+                        <label class="uploadPreview" for="file1">
+                            <input type="file" name="img" id="file1" accept="image/*">
+                            <span class="img-uploader">
+                                <div class="pl">+</div>   
+                            </span>
+                        </label>
+                        <span class="remove-image">+</span>
+                    </div>
+                    {{!-- <div class="col-6 col-xl-2 col-lg-2">
+                        <label class="uploadPreview" for="file2">
+                            <input type="file" id="file2" accept="image/*">
+                            <span class="img-uploader">
+                                <div class="pl">+</div>   
+                            </span>
+                        </label>
+                        <span class="remove-image">+</span>
+                    </div>
+                    <div class="col-6 col-xl-2 col-lg-2">
+                        <label class="uploadPreview" for="file3">
+                            <input type="file" id="file3" accept="image/*">
+                            <span class="img-uploader">
+                                <div class="pl">+</div>   
+                            </span>
+                        </label>
+                        <span class="remove-image">+</span>
+                    </div>
+                    <div class="col-6 col-xl-2 col-lg-2">
+                        <label class="uploadPreview" for="file4">
+                            <input type="file" id="file4" accept="image/*">
+                            <span class="img-uploader">
+                                <div class="pl">+</div>   
+                            </span>
+                        </label>
+                        <span class="remove-image">+</span>
+                    </div>
+                    <div class="col-6 col-xl-2 col-lg-2">
+                        <label class="uploadPreview" for="file5">
+                            <input type="file" id="file5" accept="image/*">
+                            <span class="img-uploader">
+                                <div class="pl">+</div>   
+                            </span>
+                        </label>
+                        <span class="remove-image">+</span>
+                    </div>
+                    <div class="col-6 col-xl-2 col-lg-2">
+                        <label class="uploadPreview" for="file6">
+                            <input type="file" id="file6" accept="image/*">
+                            <span class="img-uploader">
+                                <div class="pl">+</div>   
+                            </span>
+                        </label>
+                        <span class="remove-image">+</span>
+                    </div> --}}
+                </div>
+            </div>
+            <hr>
+            <div class="axel">
+                <!-- <a href="#">Предпросмотр</a> -->
+                <button type="submit" href="#">Разместить объявление</button>
+            </div>
+            </form>
+
+        </div>
+    </div>

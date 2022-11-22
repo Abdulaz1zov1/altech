@@ -1,0 +1,142 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center">
+                    <h5 class="card-title">{{title}}</h5>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newsubcat">Добавить</button>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Название</th>
+                            <th scope="col">Категория</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col" class="text-center">Порядковый номер</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each subcategory}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td>{{title}}</td>
+                            <td>{{category.title}}</td>
+                            <td>{{{status}}}</td>
+                            <td class="text-center">{{order}}</td>
+                            <td class="text-right">
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upsubcate" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/subcategory/delete/{{_id}}" 
+                                    onclick="return confirm('Вы уверены?')" 
+                                    class="ml-2 btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newsubcat" tabindex="-1" aria-labelledby="newsubcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить субкатегории</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/subcategory/" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInputsub" placeholder="Название категории" required>
+                        <label for="floatingInputsub">Название субкатегории</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="category" id="floatingInputsub2" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            {{#each category}}
+                            <option value="{{_id}}">{{title}}</option>
+                            {{/each}}
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingInputsub2">Категория</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInputsub3" placeholder="Порядковый номер" required>
+                        <label for="floatingInputsub3">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Активный</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upsubcate" tabindex="-1" aria-labelledby="upsubcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Изменить субкатегории</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/subcategory/save" method="post" name="upsubcate" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInputsub4" placeholder="Название категории" required>
+                        <label for="floatingInputsub4">Название субкатегории</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="category" id="floatingInputsub5" aria-label="Floating label select example" required="">
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            {{#each category}}
+                            <option value="{{_id}}">{{title}}</option>
+                            {{/each}}
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingInputsub5">Категория</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInputsub6" placeholder="Порядковый номер" required>
+                        <label for="floatingInputsub6">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="floatingInputsub7">
+                        <label class="form-check-label" for="floatingInputsub7">Активный</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let upForm = document.forms.upsubcate
+    const edit = (id) => {
+        fetch(`/subcategory/${id}`)
+        .then(res => res.json())
+        .then(subcategory => {
+            upForm.title.value = subcategory.title
+            upForm.category.value = subcategory.category
+            upForm.order.value = subcategory.order
+            upForm._id.value = id 
+            upForm.status.checked = category.status == 1 ? true : false
+        }).catch(e=>console.error(e))
+    }
+
+</script>

@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-description">Запольните поля</p>
+                <form action="/users/" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="text" name="name" class="form-control" id="floatingInput1" placeholder="" required>
+                                <label for="floatingInput1">Имя и фамилия</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="email" name="email" class="form-control" id="floatingInput2" placeholder="">
+                                <label for="floatingInput2">Электронная почта</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="password" name="password" class="form-control" id="floatingInput3" placeholder="" required>
+                                <label for="floatingInput3">Пароль</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="number" name="phone" class="form-control" id="floatingInput2" placeholder="" required>
+                                <label for="floatingInput2">Номер телефона</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <select class="form-select" name="gender" id="floatingSelect" aria-label="Floating label select example" required>
+                                    <option selected disabled value="">Выберите из списка</option>
+                                    <option value="0">Мужской</option>
+                                    <option value="1">Женщина</option>
+                                </select>
+                                <label for="floatingSelect">Пол</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <select class="form-select" required name="role" id="floatingSelect" aria-label="Floating label select example" required>
+                                    <option selected disabled value="">Выберите из списка</option>
+                                    <option value="1">Кассир</option>
+                                    <option value="2">Предподаватель</option>
+                                    <option value="4">Отключенный</option>
+                                </select>
+                                <label for="floatingSelect">Доступ пользователя</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="text" name="telegram" class="form-control" id="floatingInput4" placeholder="">
+                                <label for="floatingInput4">Telegram link</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="text" name="instagram" class="form-control" id="floatingInput5" placeholder="">
+                                <label for="floatingInput5">Instagram link</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3 form-floating">
+                                <input type="text" name="facebook" class="form-control" id="floatingInput6" placeholder="">
+                                <label for="floatingInput6">Facebook link</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

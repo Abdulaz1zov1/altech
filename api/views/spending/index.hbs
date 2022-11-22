@@ -1,0 +1,262 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center mb-5">
+                    <h5 class="card-title mb-0">{{title}}</h5>
+                    <div class="d-flex align-center">
+                        {{#if @root.control}}
+                            <a href="/spending/excell" class="btn btn-primary mr-2 excell-btn">Excell
+                                <i class="fas fa-file ml-2"></i>
+                            </a>
+                        {{/if}}
+                        <button class="btn btn-info ml-2" data-bs-toggle="modal" data-bs-target="#newcat">Добавить</button>
+                    </div>
+
+                </div>
+                {{#if @root.control}}
+                <div class="row mt-3 mb-5">
+                    <div class="col-4">
+                        <h5 class="card-title ml-2 mb-2">Обшие расходы: <b>{{summaSum}} </b> сум | <b>{{summaDollar}} </b> $</h5> 
+                    </div>
+                    <div class="col-4" id="monthrasxod">
+                        
+                    </div>
+                    <div class="col-4 d-flex">
+                        
+                            <input type="hidden" name="_csrf" value="{{csrf}}">     
+                            <select name="month" class="form-select me-2 month" id="month">
+                                <option selected="" disabled="" value="">Выберите категории</option>
+                                    <option value="1">Январ</option>
+                                    <option value="2">Феврал</option>
+                                    <option value="3">Март</option>
+                                    <option value="4">Aпрел</option>
+                                    <option value="5">Май</option>
+                                    <option value="6">Июн</option>
+                                    <option value="7">Июл</option>
+                                    <option value="8">Aвгуст</option>
+                                    <option value="9">Сентабр</option>
+                                    <option value="10">Октабр</option>
+                                    <option value="11">Ноябр</option>
+                                    <option value="12">Декабр</option>
+                            </select>
+                            <button class="btn btn-warning me-2" type="reset">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                            <button onclick="sendMonth()" class="btn btn-primary ml-1" >
+                                <i class="fas fa-search"></i>
+                            </button>
+                        
+                    </div>
+                </div>
+                <table class="table table-hover" id="spendtable">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col">Сумма</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each spending}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td>{{title}}</td>
+                            <td>{{{discription}}}</td>
+                            <td>{{summa}}  {{currency}}</td>
+                            <td>{{data}}</td>
+                            <td class="text-right">
+
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upcate" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/spending/delete/{{_id}}" 
+                                    onclick="return confirm('Вы уверены?')" 
+                                    class="ml-2 btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="newcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить расход</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/spending/" method="post" name="sendspend" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <select name="type" class="form-select me-2 selectchange" id="typeid" required>
+                            <option selected="" disabled="" value="">Выберите кому</option>
+                            <option value="Сотрудники">Сотрудники</option>
+                            <option value="Другие">Другие</option>
+                        </select>
+                        <label for="typeid">Выберите кому</label>
+                    </div>
+                    <div class="mb-3 form-floating workers">
+                        <select name="worker" class="form-select me-2 workerval" id="workerid">
+                            <option selected="" disabled="" value="">Выберите сотрудник</option>
+                            {{#each worker}}
+                                <option value="{{name}} {{lname}}">{{name}} {{lname}}</option>
+                            {{/each}}
+                        </select>
+                        <label for="workerid">Сотрудники</label>
+                    </div>
+                    <div class="mb-3 form-floating other">
+                        <input type="text" name="title" class="form-control otherval" id="floatingInput1" placeholder="Название категории">
+                        <label for="floatingInput1">Название</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="discription" class="form-control" id="floatingInput1" placeholder="Описание" required>
+                        <label for="floatingInput1">Описание</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="summa" class="form-control" id="floatingInput1" placeholder="Сумма" required>
+                        <label for="floatingInput1">Сумма</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="currency" id="floatingSelect1" aria-label="Floating label select example" required>
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Sum</option>
+                            <option value="1">$</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect1 padding">Статус</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upcate" tabindex="-1" aria-labelledby="upcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Изменить</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/spending/save" method="post" name="upcate" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название категории" required>
+                        <label for="floatingInput1">Название</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="discription" class="form-control" id="floatingInput1" placeholder="Описание" required>
+                        <label for="floatingInput1">Описание</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="summa" class="form-control" id="floatingInput1" placeholder="Сумма" required>
+                        <label for="floatingInput1">Сумма</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <select class="form-select" name="currency" id="floatingSelect1" aria-label="Floating label select example" required>
+                            <option selected="" disabled="" value="">Выберите из списка</option>
+                            <option value="0">Sum</option>
+                            <option value="1">$</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Выберите из списка
+                        </div>
+                        <label for="floatingSelect1 padding">Валюта</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .excell-btn:hover {
+        background-color: green;
+        color: white
+    }
+    .workers {
+        display: none;
+    }
+    .other {
+        display: none;
+    }
+</style>
+<script>
+    let upForm = document.forms.upcate
+    const edit = (id) => {
+        fetch(`/spending/${id}`)
+        .then(res => res.json())
+        .then(spending => {
+            upForm.title.value = spending.title
+            upForm.discription.value = spending.discription
+            upForm.summa.value = spending.summa
+            upForm._id.value = id 
+            upForm.currency.value = spending.currency
+        }).catch(e=>console.error(e))
+    }
+
+    let selectChange = document.querySelector('.selectchange')
+    let workers = document.querySelector('.workers')
+    let other = document.querySelector('.other')
+    selectChange.addEventListener('change', () => {
+      if(selectChange.value == "Сотрудники") {
+          workers.style.display = "block"
+          other.style.display = "none"
+
+      }  else {
+          other.style.display = "block"
+          workers.style.display = "none"
+      }
+    })
+
+    // SEARCH
+
+    function sendMonth() {
+        let month = document.getElementById('month').value;
+        let months = [' ','Январ','Феврал','Март','Aпрел','Май','Июн','Июл','Aвгуст','Сентабр','Октабр','Ноябр','Декабр']
+        if(month) {
+            fetch(`/spending/get/${month}`)
+            .then(res => res.json())
+            .then(data=>{
+                let monthrasxod = document.getElementById('monthrasxod')
+                monthrasxod.innerHTML = `
+                    <h5 class="card-title ml-2 mb-2">Расходы на ${months[month]} <b> ${data.monthsumma} </b> сум | <b> ${data.monthdollar} </b> $</h5>
+                `
+                console.log(data)
+            })
+
+        }
+    }
+
+    // for select workers
+    let sendFormSpend = document.forms.sendspend
+    sendFormSpend.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let workerVal =  document.querySelector('.workerval');
+        let otherVal = document.querySelector('.otherval');
+
+        if (workerVal.value) {
+            otherVal.value = workerVal.value
+        }
+
+        sendFormSpend.submit()
+    })
+
+</script>

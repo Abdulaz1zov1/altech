@@ -1,0 +1,226 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex mb-3">
+                    <a href="/product/"
+                       class="ml-2 btn btn-primary mr-2">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h2 class="ml-2">{{title}}</h2>
+                </div>
+                <div class="row">
+                    <form action="/product/save" method="post" name="upproduct" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <input type="hidden" name="_csrf" value="{{csrf}}">
+                        <input type="hidden" name="_id" value="{{product._id}}">
+                        <div class="row">
+                            <input type="hidden" name="atribut" id="editatribut">
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-sm-12 mb-3 form-floating padding">
+                                <input type="text" name="title" class="form-control" value="{{product.title}}" id="floatingInput1" placeholder="Наименование товара" required>
+                                <label class="ml-2" for="floatingInput1">Наименование товара</label>
+                            </div>
+                            <div class="col-xl-6 col-sm-12 mb-3 form-floating padding">
+                                <input type="number" name="price" class="form-control" value="{{product.price}}" id="floatingInput1" placeholder="Цена" required>
+                                <label class="ml-2" for="floatingInput1" class="pl-3">Цена</label>
+                            </div>
+
+                            <div class="col-xl-6 col-sm-12 form-floating padding">
+                                <select class="form-select" name="brend"  id="floatingSelect1" aria-label="Floating label select example" required="">
+                                    <option selected="" value="{{product.brend._id}}">{{product.brend.title}}</option>
+                                    {{#each brend}}
+                                        <option value="{{_id}}">{{title}}</option>
+                                    {{/each}}
+                                </select>
+                                <div class="invalid-feedback">
+                                    Выберите из списка
+                                </div>
+                                <label class="ml-2" for="floatingSelect1">Бренд</label>
+                            </div>
+
+                            <div class="col-xl-6 col-sm-12 form-floating padding">
+                                <select class="form-select subcategory" name="subcategory" id="floatingSelect12" aria-label="Floating label select example" required="">
+                                    <option selected="" value="{{product.subcategory._id}}">{{product.subcategory.title}}</option>
+                                    {{#each subcategory}}
+                                        <option value="{{_id}}">{{title}}</option>
+                                    {{/each}}
+                                </select>
+                                <div class="invalid-feedback">
+                                    Выберите из списка
+                                </div>
+                                <label class="ml-2" for="floatingSelect12">Субкатегория</label>
+                            </div>
+
+
+                        </div>
+                        <hr>
+
+                            <div class="row editmenu mb-3">
+                                {{#each product.atribut}}
+                                    <div class="col-xl-6 col-sm-12 form-floating padding">
+                                        <input type="text" value="{{spec}}" data-id="{{atr._id}}" class="form-control editinput" id="floatingInput1" placeholder="{{atr.title}}">
+                                        <label class="ml-2" for="floatingInput1">{{atr.title}}</label>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xl-6 col-sm-12 form-floating padding">
+                                <select class="form-select" name="status" id="floatingSelect1" aria-label="Floating label select example" required="">
+                                    <option selected="" disabled value="{{product.status}}">{{status}}</option>
+                                    <option value="0">Нет</option>
+                                    <option value="1">Есть</option>
+                                    <option value="2">Нет в наличие</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Выберите из списка
+                                </div>
+                                <label class="ml-2" for="floatingSelect1 padding">Статус</label>
+                            </div>
+                            <div class="col-xl-6 col-sm-12 form-floating padding">
+                                <input type="number" name="order" value="{{product.order}}"  class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>
+                                <label class="ml-2" for="floatingInput1">Порядковый номер</label>
+                            </div>
+
+                            <div class="col-xl-3 col-sm-10 form-floating padding mt-3">
+                                <div  class="d-flex justify-content-center" >
+                                    {{#if prodImg1 }}
+                                        <img src="/{{prodImg1}}" id="img1" alt="" width="70" height="70">
+                                    {{/if}}
+
+                                </div>
+                                <div>
+                                    <label class="ml-2" for="formFileMultiple" class="form-label pt">Фото товара №1</label>
+                                    <input class="form-control photo1" onchange="loadFileEdit1(event)" name="photo1"  type="file" id="formFileMultiple">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-sm-12 form-floating padding mt-3">
+                                <div  class="d-flex justify-content-center" >
+                                    {{#if prodImg2}}
+                                        <img src="/{{prodImg2}}" id="img2" alt="" width="70" height="70">
+                                    {{else}}
+                                        <img src="/{{prodImg2}}" style="display: none" id="img2" alt="" width="70" height="70">
+                                    {{/if}}
+
+                                </div>
+                                <div>
+                                    <label class="ml-2" for="formFileMultiple2" class="form-label pt">Фото товара №2</label>
+                                    <input class="form-control" onchange="loadFileEdit2(event)" name="photo2" type="file"   id="formFileMultiple2" >
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-12 form-floating padding mt-3">
+                                <div  class="d-flex justify-content-center" >
+                                    {{#if prodImg3}}
+                                        <img src="/{{prodImg3}}" id="img3" alt="" width="70" height="70">
+                                    {{else}}
+                                        <img src="/{{prodImg3}}" style="display: none" id="img3" alt="" width="70" height="70">
+                                    {{/if}}
+
+                                </div>
+                                <div>
+                                    <label class="ml-2" for="formFileMultiple3" class="form-label pt">Фото товара №3</label>
+                                    <input class="form-control" onchange="loadFileEdit3(event)" name="photo3" type="file" id="formFileMultiple3" >
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-sm-12 form-floating padding mt-3">
+                                <div  class="d-flex justify-content-center" >
+                                    {{#if prodImg4}}
+                                        <img src="/{{prodImg4}}" id="img4" alt="" width="70" height="70">
+                                    {{else}}
+                                        <img src="/{{prodImg4}}" style="display: none" id="img4" alt="" width="70" height="70">
+                                    {{/if}}
+
+                                </div>
+                                <div>
+                                    <label class="ml-2" for="formFileMultiple4" class="form-label pt">Фото товара №4</label>
+                                    <input class="form-control" onchange="loadFileEdit4(event)" name="photo4" type="file" id="formFileMultiple4" >
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-sm-12 form-floating padding mt-3" >
+<!--                                <label class="ml-2" for="textarea" class="form-label pt">Описание</label>-->
+                                <textarea name="descriptions"  id="textarea" class="form-control mb-3 pt-2">{{product.descriptions}}</textarea>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" name="sale" id="sale" value="1" data-value="{{product.sale}}" class="form-check-input" id="sale">
+                                    <label class="form-check-label" for="sale">Скидка</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .padding {
+        padding: 5px;
+    }
+    #textarea {
+        height: 90px;
+    }
+    .left {
+        padding-left: 15px;
+    }
+
+</style>
+<script>
+    let sale = document.getElementById('sale')
+    if (sale.getAttribute('data-value')=='1'){
+        sale.checked = true
+    }
+    // change edit img
+    // №1
+    var loadFileEdit1 = function(event) {
+        img1.style.display = 'block';
+        // newImg1.style.height = 30;
+        img1.src = URL.createObjectURL(event.target.files[0]);
+    };
+    // №2
+    var loadFileEdit2 = function(event) {
+        img2.style.display = 'block';
+        // newImg1.style.height = 30;
+        img2.src = URL.createObjectURL(event.target.files[0]);
+    };
+    // №3
+    var loadFileEdit3 = function(event) {
+        img3.style.display = 'block';
+        // newImg1.style.height = 30;
+        img3.src = URL.createObjectURL(event.target.files[0]);
+    };
+    // №4
+    var loadFileEdit4 = function(event) {
+        img4.style.display = 'block';
+        // newImg1.style.height = 30;
+        img4.src = URL.createObjectURL(event.target.files[0]);
+    };
+    let editAtribut = document.getElementById("editatribut")
+    // editAtribut.addEventListener('onblur', () => {
+    //     editInputValue()
+    // })
+    let atributArrays = []
+    function editInputValue() {
+        atributArrays= []
+        let editInputsValue = document.querySelectorAll('.editinput')
+        editInputsValue.forEach(inp => {
+            atributArrays.push({
+                atr: inp.getAttribute('data-id'),
+                spec: inp.value
+            })
+        })
+        editAtribut.value = JSON.stringify(atributArrays)
+    }
+
+    let upForm = document.forms.upproduct
+    upForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        editInputValue()
+        upForm.submit()
+
+    })
+</script>

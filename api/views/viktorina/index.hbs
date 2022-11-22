@@ -1,0 +1,150 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center pr-1 mb-5">
+                    <h5 class="card-title mb-0">{{title}}</h5>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newvik">Добавить</button>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название викторины</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Дата начало</th>
+                        <th scope="col">Дата заканчиваеться</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each viktorina}}
+                        <tr>
+                            <td>{{title}}</td>
+                            <td class="description">{{discription}}</td>
+                            <td>{{createdAt}}</td>
+                            <td>{{deadline}}</td>
+                            <td>{{{status}}}</td>
+                            <td class="text-right">
+                                <a href="/viktorina/more/{{_id}}" class="btn btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <button class="btn btn-warning ml-2" data-bs-toggle="modal" data-bs-target="#upvik"
+                                        onclick="edit('{{_id}}')">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/viktorina/delete/{{_id}}"
+                                   onclick="return confirm('Вы уверены?')"
+                                   class="ml-2 btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="newvik" tabindex="-1" aria-labelledby="newvik" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить викторина</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/viktorina/" method="post" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название" required>
+                        <label for="floatingInput1">Название</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <textarea name="discription" id="floatingInput1" class="form-control hightarea" ></textarea>
+                        <label for="floatingInput1">Описание</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" name="deadline" class="form-control" id="floatingInput1" placeholder="Дата заканчиваеться" required>
+                        <label for="floatingInput1">Дата заканчиваеться</label>
+                    </div>
+                    <div class="mb-5 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" id="akt1">
+                        <label class="form-check-label" for="akt1">Активный</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="upvik" tabindex="-1" aria-labelledby="upvik" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редактировать викторина</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/viktorina/save" method="post" name="editform" class="needs-validation" novalidate>
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название" required>
+                        <label for="floatingInput1">Название</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <textarea name="discription" id="floatingInput1" class="form-control hightarea" ></textarea>
+                        <label for="floatingInput1">Фамилия</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="date" name="deadline" class="form-control" id="floatingInput1" placeholder="Дата заканчиваеться" required>
+                        <label for="floatingInput1">Дата заканчиваеться</label>
+                    </div>
+                    <div class="mb-5 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" id="akt2">
+                        <label class="form-check-label" for="akt2">Активный</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .otchet {
+        margin-left: 50px;
+    }
+    .form-floating>.form-control.hightarea {
+        height: calc(8.5rem + 2px);
+    }
+    .description {
+        width: 40%;
+    }
+</style>
+
+<script>
+    let form = document.forms.editform
+    function edit(id){
+        fetch(`/viktorina/${id}`)
+                .then(res => res.json())
+                .then(viktorina => {
+                    form.title.value = viktorina.title
+                    form._id.value = viktorina._id
+                    form.discription.value = viktorina.discription
+                    form.status.checked = viktorina.status == 1 ? true : false
+                    form.deadline.value = viktorina.deadline
+                    form.createdAt.value = viktorina.createdAt
+
+                }).catch(e=>console.error(e))
+    }
+</script>

@@ -1,0 +1,971 @@
+{{> profile}}
+    <div class="tab_section crid">
+            <div class="boder"></div>
+            <ul class="nav nav-tabs container othr">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#homes">Мои объявления  <span>4</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu1s">Сообщения   <span>25</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu2s">Платежи и счет</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu3s">Информация о компании</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#menu4s">Настройки</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane container active" id="homes">
+                    <div class="link_us_aktiv">
+                        <a href="#" class="active">Активные <span>(3)</span></a>
+                        <a href="#">На <span>модерации</span></a>
+                        <a href="#">Неактивные <span>(1)</span></a>
+                    </div>
+                    {{#each ads}}
+                    <div class="item_prod quant">
+                        <a href="/ads/{{_id}}" class="img">
+                            <img src="/{{img}}" alt="" width="220">
+                        </a>
+                        <div class="text">
+                            <div class="prod_price">
+                                <p>{{price}} </p><span>сум/шт</span>
+                            </div>
+                            <a href="/ads/{{_id}}" class="title">{{title}}</a>
+                            <p>Дата публикации: <span>{{createdAt}}</span></p>
+                            <p>Дата окончания: <span>{{endAt}}</span></p>
+                            <div class="btn_a_back">
+                                <a href="#">Просмотры объявления: <span>{{views}}</span></a>
+                                <a href="#"> Просмотры телефона: <span>46</span></a>
+                                <a href="#">В Избранном: <span>15</span></a>
+                            </div>
+                        </div>
+                        <div class="user_settings">
+                            <a href="/ads/{{_id}}"><img src="images/eye.png" alt="">Просмотреть</a>
+                            <a href="#"><img src="images/repeat.png" alt="">Редактировать</a>
+                            <a href="#"><img src="images/barber.png" alt="">Деактивировать</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="tab-pane container fade" id="menu1s">
+                    <div class="mess_to">
+                        <div><p>Действия</p></div>
+                        <div><p>Пользователь</p></div>
+                        <div><p>Объявление</p></div>
+                        <div><p>Дата</p></div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew">
+                                <label for="sew"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew2">
+                                <label for="sew2"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew3">
+                                <label for="sew3"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew4">
+                                <label for="sew4"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew5">
+                                <label for="sew5"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew5">
+                                <label for="sew5"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew6">
+                                <label for="sew6"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew7">
+                                <label for="sew7"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                    <div class="mess_bottom">
+                        <div class="keys">
+                            <div>
+                                <input type="checkbox" id="sew8">
+                                <label for="sew8"></label>
+                            </div>
+                            <div>
+                                <a href="#" class="str"><i class="fas fa-star"></i><i class="far fa-star"></i></a>
+                            </div>
+                            <div>
+                                <a href=""><i class="far fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div><h3>OOO Nilpak Solution</h3></div>
+                        <div>
+                            <h5>Продаю абсолютно новый трактор BELARUS-1523</h5>
+                            <p>Проект полностью финансировался за счет собственных средств. Стартовые инвестиции в проект составили 12 млн руб., из них 70% пошло на разработку ERP-системы (от англ. Enterprise Resource Planning, управление ресурсами предприятия), остальное на создание сайта, а также мобильных приложений для iOS и Android.</p>
+                        </div>
+                        <div class="nigh">
+                            <p>Вчера, 22:31</p>   
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="menu2s">
+                    <div style="max-width: 100%; overflow-x: auto;">
+                        <table class="table_lay">
+                            <thead>
+                                <tr>
+                                    <td>Дата операции</td>
+                                    <td>Описание</td>
+                                    <td>Тип операции</td>
+                                    <td>Тип транзакции</td>
+                                    <td>Сумма</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="menu3s">
+                    <div id="accordion" class="accord">
+                        <div class="" id="headingOne">
+                            <div class="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             <h3>Информация о компании</h3>
+                            </div>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="body_accord">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-4 great_us">
+                                                <label for="">Логотип компании:</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8 great_us">
+                                                <label class="uploadPreview" for="file6">
+                                                    <input type="file" id="file6" accept="image/*">
+                                                    <span class="img-uploader">
+                                                        <div class="pl">Изменить логотип</div>   
+                                                    </span>
+                                                </label>
+                                                <span class="remove-image"></span>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Номер телефона *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="99893 3888010">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Название компании *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Universal Texnika HK">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Ваше имя и фамилия</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Хасанов Руслан Мидхатович">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Веб-сайт компании</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="www.universal-texnika.uz/index.html">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <h5>Описание компании</h5>
+                                        <p>Этот текст — первое, что увидит посетитель, оказавшись на вашем странице, поэтому он должен быть одновременно и «цепляющим», и информативным: чтобы ваш потенциальный клиент сразу понял, что именно ваша компания может предложить ему то, что он искал, и выполнит заказ на высшем уровне.</p>
+                                        <textarea name="" id="" cols="30" rows="7"></textarea>
+                                    </div>
+                                </div>
+                                <h5 class="rubrics">Рубрики:</h5>
+                                <p>Ваша компания будет выводится в этих рубриках(-е) вне зависимости наличия актуальных предложений.</p>
+                                <div class="row inp_ase">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd1">
+                                            <label for="dd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd2"  checked="">
+                                            <label for="dd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd3">
+                                            <label for="dd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd4">
+                                            <label for="dd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx1">
+                                            <label for="ddcx1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx2" checked="">
+                                            <label for="ddcx2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx3">
+                                            <label for="ddcx3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx4">
+                                            <label for="ddcx4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd1" checked="">
+                                            <label for="ddsd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd2">
+                                            <label for="ddsd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd3">
+                                            <label for="ddsd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd4" checked="">
+                                            <label for="ddsd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa1">
+                                            <label for="ddaa1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa2">
+                                            <label for="ddaa2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa3">
+                                            <label for="ddaa3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa4">
+                                            <label for="ddaa4">Мото</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="update_ber">Обновить данные</a>
+                            </div>
+                        </div>
+                         <div class="" id="headingOnete">
+                            <div class="collapsed" data-toggle="collapse" data-target="#collapseOnete" aria-expanded="true" aria-controls="collapseOnete">
+                             <h3>Адрес компании</h3>
+                            </div>
+                        </div>
+                        <div id="collapseOnete" class="collapse" aria-labelledby="headingOnete" data-parent="#accordion">
+                             <div class="body_accord">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-4 great_us">
+                                                <label for="">Логотип компании:</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8 great_us">
+                                                <label class="uploadPreview" for="file6">
+                                                    <input type="file" id="file6" accept="image/*">
+                                                    <span class="img-uploader">
+                                                        <div class="pl">Изменить логотип</div>   
+                                                    </span>
+                                                </label>
+                                                <span class="remove-image"></span>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Номер телефона *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="99893 3888010">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Название компании *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Universal Texnika HK">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Ваше имя и фамилия</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Хасанов Руслан Мидхатович">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Веб-сайт компании</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="www.universal-texnika.uz/index.html">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <h5>Описание компании</h5>
+                                        <p>Этот текст — первое, что увидит посетитель, оказавшись на вашем странице, поэтому он должен быть одновременно и «цепляющим», и информативным: чтобы ваш потенциальный клиент сразу понял, что именно ваша компания может предложить ему то, что он искал, и выполнит заказ на высшем уровне.</p>
+                                        <textarea name="" id="" cols="30" rows="7"></textarea>
+                                    </div>
+                                </div>
+                                <h5 class="rubrics">Рубрики:</h5>
+                                <p>Ваша компания будет выводится в этих рубриках(-е) вне зависимости наличия актуальных предложений.</p>
+                                <div class="row inp_ase">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd1">
+                                            <label for="dd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd2"  checked="">
+                                            <label for="dd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd3">
+                                            <label for="dd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd4">
+                                            <label for="dd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx1">
+                                            <label for="ddcx1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx2" checked="">
+                                            <label for="ddcx2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx3">
+                                            <label for="ddcx3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx4">
+                                            <label for="ddcx4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd1" checked="">
+                                            <label for="ddsd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd2">
+                                            <label for="ddsd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd3">
+                                            <label for="ddsd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd4" checked="">
+                                            <label for="ddsd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa1">
+                                            <label for="ddaa1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa2">
+                                            <label for="ddaa2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa3">
+                                            <label for="ddaa3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa4">
+                                            <label for="ddaa4">Мото</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="update_ber">Обновить данные</a>
+                            </div>
+                        </div>
+                         <div class="" id="headingOneb">
+                            <div class="collapsed" data-toggle="collapse" data-target="#collapseOneb" aria-expanded="true" aria-controls="collapseOneb">
+                             <h3>Контактное лицо</h3>
+                            </div>
+                        </div>
+                        <div id="collapseOneb" class="collapse" aria-labelledby="headingOneb" data-parent="#accordion">
+                             <div class="body_accord">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-4 great_us">
+                                                <label for="">Логотип компании:</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8 great_us">
+                                                <label class="uploadPreview" for="file6">
+                                                    <input type="file" id="file6" accept="image/*">
+                                                    <span class="img-uploader">
+                                                        <div class="pl">Изменить логотип</div>   
+                                                    </span>
+                                                </label>
+                                                <span class="remove-image"></span>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Номер телефона *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="99893 3888010">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Название компании *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Universal Texnika HK">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Ваше имя и фамилия</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Хасанов Руслан Мидхатович">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Веб-сайт компании</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="www.universal-texnika.uz/index.html">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <h5>Описание компании</h5>
+                                        <p>Этот текст — первое, что увидит посетитель, оказавшись на вашем странице, поэтому он должен быть одновременно и «цепляющим», и информативным: чтобы ваш потенциальный клиент сразу понял, что именно ваша компания может предложить ему то, что он искал, и выполнит заказ на высшем уровне.</p>
+                                        <textarea name="" id="" cols="30" rows="7"></textarea>
+                                    </div>
+                                </div>
+                                <h5 class="rubrics">Рубрики:</h5>
+                                <p>Ваша компания будет выводится в этих рубриках(-е) вне зависимости наличия актуальных предложений.</p>
+                                <div class="row inp_ase">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd1">
+                                            <label for="dd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd2"  checked="">
+                                            <label for="dd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd3">
+                                            <label for="dd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd4">
+                                            <label for="dd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx1">
+                                            <label for="ddcx1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx2" checked="">
+                                            <label for="ddcx2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx3">
+                                            <label for="ddcx3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx4">
+                                            <label for="ddcx4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd1" checked="">
+                                            <label for="ddsd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd2">
+                                            <label for="ddsd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd3">
+                                            <label for="ddsd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd4" checked="">
+                                            <label for="ddsd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa1">
+                                            <label for="ddaa1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa2">
+                                            <label for="ddaa2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa3">
+                                            <label for="ddaa3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa4">
+                                            <label for="ddaa4">Мото</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="update_ber">Обновить данные</a>
+                            </div>
+                        </div>
+                         <div class="" id="headingOnevd">
+                            <div class="collapsed" data-toggle="collapse" data-target="#collapseOnevd" aria-expanded="true" aria-controls="collapseOnevd">
+                             <h3>Изменение пароля и настройки профиля</h3>
+                            </div>
+                        </div>
+                        <div id="collapseOnevd" class="collapse" aria-labelledby="headingOnevd" data-parent="#accordion">
+                             <div class="body_accord">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-sm-4 great_us">
+                                                <label for="">Логотип компании:</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8 great_us">
+                                                <label class="uploadPreview" for="file6">
+                                                    <input type="file" id="file6" accept="image/*">
+                                                    <span class="img-uploader">
+                                                        <div class="pl">Изменить логотип</div>   
+                                                    </span>
+                                                </label>
+                                                <span class="remove-image"></span>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Номер телефона *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="99893 3888010">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Название компании *</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Universal Texnika HK">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Ваше имя и фамилия</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="Хасанов Руслан Мидхатович">
+                                            </div>
+                                            <div class="col-lg-4 col-sm-4">
+                                                <label for="">Веб-сайт компании</label>
+                                            </div>
+                                            <div class="col-lg-8 col-sm-8">
+                                                <input type="text" value="www.universal-texnika.uz/index.html">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <h5>Описание компании</h5>
+                                        <p>Этот текст — первое, что увидит посетитель, оказавшись на вашем странице, поэтому он должен быть одновременно и «цепляющим», и информативным: чтобы ваш потенциальный клиент сразу понял, что именно ваша компания может предложить ему то, что он искал, и выполнит заказ на высшем уровне.</p>
+                                        <textarea name="" id="" cols="30" rows="7"></textarea>
+                                    </div>
+                                </div>
+                                <h5 class="rubrics">Рубрики:</h5>
+                                <p>Ваша компания будет выводится в этих рубриках(-е) вне зависимости наличия актуальных предложений.</p>
+                                <div class="row inp_ase">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd1">
+                                            <label for="dd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd2"  checked="">
+                                            <label for="dd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd3">
+                                            <label for="dd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="dd4">
+                                            <label for="dd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx1">
+                                            <label for="ddcx1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx2" checked="">
+                                            <label for="ddcx2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx3">
+                                            <label for="ddcx3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddcx4">
+                                            <label for="ddcx4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd1" checked="">
+                                            <label for="ddsd1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd2">
+                                            <label for="ddsd2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd3">
+                                            <label for="ddsd3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddsd4" checked="">
+                                            <label for="ddsd4">Мото</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa1">
+                                            <label for="ddaa1">Легковые автомобили</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa2">
+                                            <label for="ddaa2">Автозапчасти и аксессуары</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa3">
+                                            <label for="ddaa3">Шины, диски и колёса</label>
+                                        </div>
+                                        <div class="form_group">
+                                            <input type="checkbox" id="ddaa4">
+                                            <label for="ddaa4">Мото</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="update_ber">Обновить данные</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="menu4s">
+                    <div style="max-width: 100%; overflow-x: auto;">
+                        <table class="table_lay">
+                            <thead>
+                                <tr>
+                                    <td>Дата операции</td>
+                                    <td>Описание</td>
+                                    <td>Тип операции</td>
+                                    <td>Тип транзакции</td>
+                                    <td>Сумма</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Продвижение объявления в ТОП на 7 дней</td>
+                                    <td>Списание баланса</td>
+                                    <td>Сайт Agrosale</td>
+                                    <td>16 000 сум</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-01-01 11:57:01</td>
+                                    <td>Пополнение паланса личного кабинета</td>
+                                    <td>Пополнение баланса</td>
+                                    <td>PAYNET</td>
+                                    <td>180 000 сум</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

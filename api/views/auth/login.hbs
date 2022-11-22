@@ -1,0 +1,35 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-12 col-lg-4">
+        <div class="card login-box-container">
+            <div class="card-body">
+                <div class="authent-text">
+                    <p>Добро пожаловать</p>
+                    <p>Введите свои данные для авторизации</p>
+                </div>
+
+                <form action="/auth/login" method="post">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Адрес почты</label>
+                            </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Пароль</label>
+                            </div>
+                    </div>
+                    <div class="d-grid">
+                    <button type="submit" class="btn btn-info m-b-xs">Авторизоваться</button>
+                </div>
+                    </form>
+                    <div class="authent-reg">
+                        <p>Нету аккаунта? <a href="/auth/reg/">Регистрация</a></p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+

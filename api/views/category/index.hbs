@@ -1,0 +1,165 @@
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-center">
+                    <h5 class="card-title">{{title}}</h5>
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#newcat">Добавить</button>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col"></th>
+                            <th scope="col">Название</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col" class="text-center">Порядковый номер</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each category}}
+                        <tr>
+                            <td>{{index}}</td>
+                            <td><img src="/{{img}}" alt="" width="50"></td>
+                            <td>{{title}}</td>
+                            <td>{{{status}}}</td>
+                            <td class="text-center">{{order}}</td>
+                            <td class="text-right">
+                                <button onclick="edit('{{_id}}')" data-bs-toggle="modal" data-bs-target="#upcate" class="btn btn-warning ml-2">
+                                    <i class="fas fa-pen"></i></button>
+                                <a href="/category/delete/{{_id}}" 
+                                    onclick="return confirm('Вы уверены?')" 
+                                    class="ml-2 btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="newcat" tabindex="-1" aria-labelledby="newcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить категории</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/category/" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название категории" required>
+                        <label for="floatingInput1">Название категории</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>
+                        <label for="floatingInput1">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-floating " >
+                        <div class="d-flex justify-content-center">
+                            <img src="" class="newimg1" alt="" width="70" height="70">
+                        </div>
+                        <div>
+                            <label for="formFileMultiple" class="form-label pt">Фотография категории</label>
+                            <input class="form-control" onchange="loadFile1(event)" name="img" type="file" id="formFileMultiple" >
+                        </div>
+                    </div>
+                    <div class="mb-3 form-floating " >
+                        <div class="d-flex justify-content-center">
+                            <img src="" class="newimg2" alt="" width="70" height="70">
+                        </div>
+                        <div>
+                            <label for="formFileMultiple" class="form-label pt">Иконка категории</label>
+                            <input class="form-control" onchange="loadFile2(event)" name="icon" type="file" id="formFileMultiple" >
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Активный</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="upcate" tabindex="-1" aria-labelledby="upcat" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Изменить категории</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/category/save" method="post" name="upcate" class="needs-validation" novalidate enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="{{csrf}}">
+                    <input type="hidden" name="_id" value="">
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="floatingInput1" placeholder="Название категории" required>
+                        <label for="floatingInput1">Название категории</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="number" name="order" class="form-control" id="floatingInput1" placeholder="Порядковый номер" required>
+                        <label for="floatingInput1">Порядковый номер</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="status" value="1" class="form-check-input" checked id="exampleCheck2">
+                        <label class="form-check-label" for="exampleCheck2">Активный</label>
+                    </div>
+                    <div class="mb-3 form-floating " >
+                        <div class="d-flex justify-content-center">
+                            <img src="" id="imgup" alt="" width="70" height="70">
+                        </div>
+                        <div>
+                            <label for="formFileMultiple" class="form-label pt">Фотография категории</label>
+                            <input class="form-control"  name="img" type="file" id="formFileMultiple" >
+                        </div>
+                    </div>
+                    <div class="mb-3 form-floating " >
+                        <div class="d-flex justify-content-center">
+                            <img src="" id="iconup" alt="" width="70" height="70">
+                        </div>
+                        <div>
+                            <label for="formFileMultiple" class="form-label pt">Иконка категории</label>
+                            <input class="form-control"  name="icon" type="file" id="formFileMultiple" >
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let upForm = document.forms.upcate
+    const edit = (id) => {
+        fetch(`/category/get/${id}`)
+        .then(res => res.json())
+        .then(category => {
+            upForm.title.value = category.title
+            upForm.order.value = category.order
+            upForm._id.value = id 
+            upForm.status.checked = category.status == 1 ? true : false
+        }).catch(e=>console.error(e))
+    }
+    var loadFile1 = function(event) {
+        var newImg1 = document.querySelector('.newimg1');
+        newImg1.style.display = 'block';
+        // newImg1.style.height = 30;
+        newImg1.src = URL.createObjectURL(event.target.files[0]);
+    };
+    var loadFile2 = function(event) {
+        var newImg2 = document.querySelector('.newimg2');
+        newImg2.style.display = 'block';
+        // newImg1.style.height = 30;
+        newImg2.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>
